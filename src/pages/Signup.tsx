@@ -10,6 +10,7 @@ export interface SignupProps {
     email: string;
     password: string;
     confirmPassword: string;
+    nickName: string;
 }
 
 function Signup() {
@@ -65,6 +66,17 @@ function Signup() {
                             <p className="error-text">
                                 비밀번호를 다시 입력해주세요.
                             </p>
+                        )}
+                    </fieldset>
+                    <fieldset>
+                        <input
+                            inputMode="text"
+                            placeholder="닉네임"
+                            type="text"
+                            {...register("nickName", { required: true })}
+                        />
+                        {errors.nickName && (
+                            <p className="error-text">닉네임을 입력해주세요.</p>
                         )}
                     </fieldset>
                     <fieldset>
