@@ -6,10 +6,12 @@ import { light } from "./style/theme"; // 테마 파일 경로
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Main from "./pages/Main";
+import { GlobalStyle } from "./style/global";
 
 function App() {
     return (
         <ThemeProvider theme={light}>
+            <GlobalStyle />
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Login />} />
