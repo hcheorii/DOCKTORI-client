@@ -1,27 +1,29 @@
 // src/components/AuthLayout.tsx
 import React from "react";
 import styled from "styled-components";
-import image from "../../images/logo_bgremoved.png";
-import { GlobalStyle } from "../../style/global";
+import image from "../../../images/logo_bgremoved.png"; // 로고 이미지 경로
 
-const AuthLayout = ({ children }: { children: React.ReactNode }) => {
+// Layout 컴포넌트 정의, children prop으로 자식 요소를 받습니다.
+const Layout = ({ children }: { children: React.ReactNode }) => {
     return (
-        <>
-            <GlobalStyle>
-                <CenteredLayout>
-                    <Layout>
-                        <div className="left-section">
-                            <img src={image} alt="logo" className="logo" />
-                            <TextOverlay>📖 독서 기록을 쌓아보세요</TextOverlay>
-                        </div>
-                        <div className="right-section">{children}</div>
-                    </Layout>
-                </CenteredLayout>
-            </GlobalStyle>
-        </>
+        <CenteredLayout>
+            <LayoutStyle>
+                <div className="left-section">
+                    <img src={image} alt="logo" className="logo" />
+                    <div className="item-containter">
+                        <button>1</button>
+                        <button>1</button>
+                        <button>1</button>
+                        <button>1</button>
+                    </div>
+                </div>
+                <div className="right-section">{children}</div>
+            </LayoutStyle>
+        </CenteredLayout>
     );
 };
 
+// 중앙에 배치된 레이아웃 스타일
 const CenteredLayout = styled.div`
     display: flex;
     justify-content: center;
@@ -29,10 +31,11 @@ const CenteredLayout = styled.div`
     height: 100vh; /* 화면의 세로 전체를 차지 */
 `;
 
-const Layout = styled.div`
+// 레이아웃 스타일 정의
+const LayoutStyle = styled.div`
     display: flex;
-    height: 80vh;
-    width: 70vw;
+    height: 95vh;
+    width: 95vw;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* 박스 쉐도우 추가 */
     border-radius: 12px; /* border-radius 추가 */
 
@@ -41,7 +44,6 @@ const Layout = styled.div`
         background-color: #be8a62;
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
         color: white;
         text-align: center;
@@ -54,7 +56,7 @@ const Layout = styled.div`
     }
 
     .right-section {
-        flex: 1;
+        flex: 4;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -62,10 +64,11 @@ const Layout = styled.div`
         border-top-right-radius: 12px; /* 오른쪽 상단 모서리 둥글게 */
         border-bottom-right-radius: 12px; /* 오른쪽 하단 모서리 둥글게 */
     }
+
+    .item-containter {
+        display: flex;
+        flex-direction: column;
+    }
 `;
 
-const TextOverlay = styled.div`
-    font-size: 1.5rem; /* 글꼴 크기 조정 */
-`;
-
-export default AuthLayout;
+export default Layout;

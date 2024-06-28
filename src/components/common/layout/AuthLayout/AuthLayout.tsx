@@ -1,23 +1,30 @@
 // src/components/AuthLayout.tsx
 import React from "react";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import image from "../../images/logo_bgremoved.png";
-import { GlobalStyle } from "../../style/global";
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
+    const GlobalStyle = createGlobalStyle`
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+    `;
+
     return (
         <>
-            <GlobalStyle>
-                <CenteredLayout>
-                    <Layout>
-                        <div className="left-section">
-                            <img src={image} alt="logo" className="logo" />
-                            <TextOverlay>📖 독서 기록을 쌓아보세요</TextOverlay>
-                        </div>
-                        <div className="right-section">{children}</div>
-                    </Layout>
-                </CenteredLayout>
-            </GlobalStyle>
+            <GlobalStyle />
+            <CenteredLayout>
+                <Layout>
+                    <div className="left-section">
+                        <img src={image} alt="logo" className="logo" />
+                        <TextOverlay>📖 독서 기록을 쌓아보세요</TextOverlay>
+                    </div>
+                    <div className="right-section">{children}</div>
+                </Layout>
+            </CenteredLayout>
         </>
     );
 };
