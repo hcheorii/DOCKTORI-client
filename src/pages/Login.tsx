@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../hooks/useAuth";
 import styled from "styled-components";
-import AuthLayout from "../components/AuthLayout/AuthLayout";
+import AuthLayout from "../components/layout/AuthLayout/AuthLayout";
 
 export interface LoginProps {
     email: string;

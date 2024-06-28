@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Layout from "../components/common/layout/Layout";
+import Layout from "../components/layout/Layout";
 
 function Main() {
     return (
