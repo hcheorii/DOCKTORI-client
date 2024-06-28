@@ -1,21 +1,11 @@
 // src/components/AuthLayout.tsx
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import image from "../../images/logo_bgremoved.png";
+import image from "../../../images/logo_bgremoved.png";
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
-    const GlobalStyle = createGlobalStyle`
-        body {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-    `;
-
     return (
         <>
-            <GlobalStyle />
             <CenteredLayout>
                 <Layout>
                     <div className="left-section">
@@ -38,8 +28,8 @@ const CenteredLayout = styled.div`
 
 const Layout = styled.div`
     display: flex;
-    height: 80vh;
-    width: 70vw;
+    height: 90vh;
+    width: 95vw;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* 박스 쉐도우 추가 */
     border-radius: 12px; /* border-radius 추가 */
 
@@ -56,7 +46,7 @@ const Layout = styled.div`
         border-bottom-left-radius: 12px; /* 왼쪽 하단 모서리 둥글게 */
 
         .logo {
-            width: 50%; /* 이미지 크기 조정 */
+            width: 30%; /* 이미지 크기 조정 */
         }
     }
 
