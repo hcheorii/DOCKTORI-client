@@ -28,7 +28,7 @@ function Signup() {
 
   return (
     <SignupContainer>
-      <div className='title'>🐿 독토리 회원가입</div>
+      <div className='title'>독토리 회원가입</div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
           <input
@@ -77,7 +77,7 @@ function Signup() {
         </fieldset>
       </form>
       <div className='info'>
-        <Link to='/'>이미 회원이신가요?</Link>
+        <Link to='/login'>이미 회원이신가요?</Link>
       </div>
     </SignupContainer>
   );

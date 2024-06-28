@@ -1,12 +1,12 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Header from '../common/Header';
+import Navbar from '../common/Navbar';
 import styled from 'styled-components';
 
 const Layout = () => {
   return (
     <>
-      <Header />
+      <Navbar />
       <RightSectionStyle>
         <Outlet />
       </RightSectionStyle>

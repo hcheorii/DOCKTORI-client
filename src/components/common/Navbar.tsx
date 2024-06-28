@@ -4,9 +4,9 @@ import Button from './Button';
 import image from '../../images/logo_bgremoved.png';
 import { FaPlus } from 'react-icons/fa';
 
-export default function Header() {
+export default function Navbar() {
   return (
-    <HeaderStyle>
+    <NavbarStyle>
       <div className='item-containter'>
         <div className='logo'>
           <img src={image} alt='logo' />
@@ -25,11 +25,11 @@ export default function Header() {
       <div className='user'>
         <FaCircleUser size={35} />
       </div>
-    </HeaderStyle>
+    </NavbarStyle>
   );
 }
 
-const HeaderStyle = styled.div`
+const NavbarStyle = styled.div`
   position: relative;
   flex: 1;
   background-color: #be8a62;

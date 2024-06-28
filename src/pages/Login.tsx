@@ -26,7 +26,7 @@ function Login() {
 
   return (
     <LoginContainer>
-      <div className='title'>🐿 독토리 로그인</div>
+      <div className='title'>독토리 로그인</div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
           <input
@@ -53,7 +53,6 @@ function Login() {
         </fieldset>
       </form>
       <div className='info'>
-        <Link to='/reset'>비밀번호 초기화</Link>
         <Link to='/signup'>회원가입</Link>
       </div>
     </LoginContainer>
@@ -113,7 +112,7 @@ const LoginContainer = styled.div`
     width: 100%;
     margin-top: 10px;
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
   }
 
   .info a {
