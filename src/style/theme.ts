@@ -1,70 +1,74 @@
 // src/theme.ts
 export type ColorKey =
-    | "first"
-    | "second"
-    | "third"
-    | "text"
-    | "lightgray"
-    | "background";
+  | 'first'
+  | 'second'
+  | 'third'
+  | 'text'
+  | 'lightgray'
+  | 'background';
 
-export type ButtonSize = "large" | "medium" | "small";
-export type ButtonScheme = "primary" | "normal";
+export type ButtonSize = 'large' | 'medium' | 'small';
+export type ButtonScheme = 'primary' | 'danger';
 
 interface Theme {
-    color: Record<ColorKey, string>;
+  color: Record<ColorKey, string>;
 
-    button: {
-        [key in ButtonSize]: {
-            fontSize: string;
-            padding: string;
-        };
+  button: {
+    [key in ButtonSize]: {
+      fontSize: string;
+      padding: string;
     };
-    buttonScheme: {
-        [key in ButtonScheme]: {
-            color: string;
-            backgroundColor: string;
-        };
+  };
+  buttonScheme: {
+    [key in ButtonScheme]: {
+      color: string;
+      backgroundColor: string;
     };
-    borderRadius: {
-        default: string;
-    };
+  };
+  borderRadius: {
+    default: string;
+    medium: string;
+    rounded: string;
+  };
 }
 
 export const light: Theme = {
-    color: {
-        first: "#8e6547",
-        second: "#BE8A62",
-        third: "#f3b340",
-        background: "#f3f0ed",
-        lightgray: "lightgray",
-        text: "black",
-    },
+  color: {
+    first: '#8e6547',
+    second: '#BE8A62',
+    third: '#f3b340',
+    background: '#f3f0ed',
+    lightgray: 'lightgray',
+    text: 'black',
+  },
 
-    button: {
-        large: {
-            fontSize: "1.5rem",
-            padding: "1rem 2rem",
-        },
-        medium: {
-            fontSize: "1rem",
-            padding: "0.5rem 1rem",
-        },
-        small: {
-            fontSize: "0.75rem",
-            padding: "0.25rem 0.5rem",
-        },
+  button: {
+    large: {
+      fontSize: '1.5rem',
+      padding: '1rem 2rem',
     },
-    buttonScheme: {
-        primary: {
-            color: "white",
-            backgroundColor: "#8e6547",
-        },
-        normal: {
-            color: "white",
-            backgroundColor: "#f3b340",
-        },
+    medium: {
+      fontSize: '1rem',
+      padding: '0.5rem 1rem',
     },
-    borderRadius: {
-        default: "4px",
+    small: {
+      fontSize: '0.75rem',
+      padding: '0.25rem 0.5rem',
     },
+  },
+  buttonScheme: {
+    primary: {
+      color: 'white',
+      backgroundColor: '#8e6547',
+    },
+    danger: {
+      color: 'white',
+      backgroundColor: '#f3b340',
+    },
+  },
+  borderRadius: {
+    default: '4px',
+    medium: '8px',
+    rounded: '100%',
+  },
 };
