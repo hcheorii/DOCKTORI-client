@@ -77,7 +77,7 @@ function Signup() {
         </fieldset>
       </form>
       <div className='info'>
-        <Link to='/login'>이미 회원이신가요?</Link>
+        <Link to='/auth/login'>이미 회원이신가요?</Link>
       </div>
     </SignupContainer>
   );

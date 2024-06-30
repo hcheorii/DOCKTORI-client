@@ -53,7 +53,7 @@ function Login() {
         </fieldset>
       </form>
       <div className='info'>
-        <Link to='/signup'>회원가입</Link>
+        <Link to='/auth/signup'>회원가입</Link>
       </div>
     </LoginContainer>
   );

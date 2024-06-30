@@ -27,7 +27,7 @@ export default function Navbar() {
   const handleLogoutConfirm = () => {
     setShowLogoutModal(false);
     storeLogout();
-    nav('/login');
+    nav('/auth/login');
   };
 
   const handleWithdrawalClose = () => setShowWithdrawalModal(false);
@@ -35,7 +35,7 @@ export default function Navbar() {
     setShowWithdrawalModal(false);
     console.log('회원 탈퇴되었습니다.');
     //회원탈퇴 API 사용
-    nav('/login');
+    nav('/auth/login');
   };
 
   return (

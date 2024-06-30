@@ -19,52 +19,58 @@ import ReadedBooks from './pages/ReadedBooks';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Wrapper />,
-    errorElement: <Error />,
+    element: (
+      <Wrapper>
+        <Layout />
+      </Wrapper>
+    ),
+    errorElement: (
+      <Wrapper>
+        <Error />
+      </Wrapper>
+    ),
     children: [
       {
-        path: '/',
-        element: <Layout />,
-        children: [
-          {
-            path: '/main',
-            element: <Main />,
-            index: true,
-          },
-          {
-            path: '/favorite',
-            element: <Favorite />,
-            index: true,
-          },
-          {
-            path: '/changepassword',
-            element: <ChangePassword />,
-            index: true,
-          },
-          {
-            path: '/readingbooks',
-            element: <ReadingBooks />,
-            index: true,
-          },
-          {
-            path: '/readedbooks',
-            element: <ReadedBooks />,
-            index: true,
-          },
-        ],
+        index: true,
+        element: <Main />,
       },
       {
-        element: <AuthLayout />,
-        children: [
-          {
-            path: '/login',
-            element: <Login />,
-          },
-          {
-            path: '/signup',
-            element: <Signup />,
-          },
-        ],
+        path: '/main',
+        element: <Main />,
+      },
+      {
+        path: '/favorite',
+        element: <Favorite />,
+      },
+      {
+        path: '/changepassword',
+        element: <ChangePassword />,
+      },
+      {
+        path: '/readingbooks',
+        element: <ReadingBooks />,
+      },
+      {
+        path: '/readedbooks',
+        element: <ReadedBooks />,
+      },
+    ],
+  },
+  {
+    path: '/auth',
+    element: (
+      <Wrapper>
+        <AuthLayout />
+      </Wrapper>
+    ),
+    children: [
+      {
+        path: '/auth/login',
+        element: <Login />,
+      },
+      {
+        path: '/auth/signup',
+        element: <Signup />,
       },
     ],
   },

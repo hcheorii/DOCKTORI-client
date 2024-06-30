@@ -1,13 +1,14 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 
-export default function Wrapper() {
+interface Props {
+  children: React.ReactNode;
+}
+
+export default function Wrapper({ children }: Props) {
   return (
     <WrapperContainer>
-      <ContentContainer>
-        <Outlet />
-      </ContentContainer>
+      <ContentContainer>{children}</ContentContainer>
     </WrapperContainer>
   );
 }
