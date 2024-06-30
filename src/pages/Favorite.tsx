@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 function Favorite() {
-    return <FavoriteStyle>favorite</FavoriteStyle>;
+  return <FavoriteStyle>favorite</FavoriteStyle>;
 }
 
 const FavoriteStyle = styled.div``;

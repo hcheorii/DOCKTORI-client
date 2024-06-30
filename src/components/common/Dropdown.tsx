@@ -73,7 +73,7 @@ const DropDownStyle = styled.div<DropDownStyleProps>`
     right: 0;
     width: 200px;
     padding: 10px; /* 패널의 패딩을 조금 줄였습니다 */
-    background: #fff;
+    background-color: ${({ theme }) => theme.color.background};
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: ${({ theme }) => theme.borderRadius.default};
     z-index: 100; /* 이게 높아야 화면의 위쪽으로 나옴 */

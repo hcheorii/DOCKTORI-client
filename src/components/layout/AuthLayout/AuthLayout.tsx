@@ -20,7 +20,7 @@ const RightSectionStyle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.color.background};
   border-top-right-radius: 12px; /* 오른쪽 상단 모서리 둥글게 */
   border-bottom-right-radius: 12px; /* 오른쪽 하단 모서리 둥글게 */
 `;

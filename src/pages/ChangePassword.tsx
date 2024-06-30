@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 function ChangePassword() {
-    return <ChangePasswordStyle>ChangePassword</ChangePasswordStyle>;
+  return <ChangePasswordStyle>ChangePassword</ChangePasswordStyle>;
 }
 
 const ChangePasswordStyle = styled.div``;
