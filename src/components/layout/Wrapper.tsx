@@ -18,6 +18,7 @@ const WrapperContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh; /* 화면의 세로 전체를 차지 */
+  background-color: ${({ theme }) => theme.color.lightgray};
 `;
 
 const ContentContainer = styled.div`

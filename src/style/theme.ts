@@ -32,7 +32,7 @@ interface Theme {
   };
 }
 
-export const light: Theme = {
+export const theme: Theme = {
   color: {
     first: '#8e6547',
     second: '#BE8A62',

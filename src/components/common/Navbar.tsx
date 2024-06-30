@@ -80,7 +80,7 @@ export default function Navbar() {
       </div>
       <div className='user'>
         <DropDown toggleButton={<FaCircleUser size={35} />}>
-          <Link to='/changepassword'>
+          <Link to='/auth/changepassword'>
             <RiLockPasswordFill />
             비밀번호 변경
           </Link>

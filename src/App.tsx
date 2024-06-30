@@ -2,7 +2,7 @@
 import React from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import { light } from './style/theme'; // 테마 파일 경로
+import { theme } from './style/theme'; // 테마 파일 경로
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Main from './pages/Main';
@@ -42,10 +42,7 @@ const router = createBrowserRouter([
         path: '/favorite',
         element: <Favorite />,
       },
-      {
-        path: '/changepassword',
-        element: <ChangePassword />,
-      },
+
       {
         path: '/readingbooks',
         element: <ReadingBooks />,
@@ -72,13 +69,17 @@ const router = createBrowserRouter([
         path: '/auth/signup',
         element: <Signup />,
       },
+      {
+        path: '/auth/changepassword',
+        element: <ChangePassword />,
+      },
     ],
   },
 ]);
 
 function App() {
   return (
-    <ThemeProvider theme={light}>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
       <RouterProvider router={router} />
     </ThemeProvider>
