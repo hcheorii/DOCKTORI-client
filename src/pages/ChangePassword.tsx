@@ -18,7 +18,12 @@ function ChangePassword() {
     } = useForm<UserChangePassword>();
 
     const onSubmit = (data: UserChangePassword) => {
-        userChangePassword(data);
+        const token = getToken() as string; // 타입 단언을 사용하여 token이 string임을 명시
+        const dataWithToken = {
+            ...data,
+            token,
+        };
+        userChangePassword(dataWithToken);
     };
 
     useEffect(() => {
@@ -26,34 +31,12 @@ function ChangePassword() {
             showAlert("로그인이 필요합니다.");
             nav("/auth/login");
         }
-    });
+    }, [nav, showAlert]); // 빈 배열을 추가하여 처음 렌더링될 때만 실행
 
     return (
         <ChangePasswordStyle>
             <div className="title">비밀번호 변경</div>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <fieldset>
-                    <input
-                        inputMode="email"
-                        placeholder="이메일"
-                        type="email"
-                        {...register("email", { required: true })}
-                    />
-                    {errors.email && (
-                        <p className="error-text">이메일을 입력해주세요.</p>
-                    )}
-                </fieldset>
-                <fieldset>
-                    <input
-                        inputMode="text"
-                        placeholder="비밀번호"
-                        type="password"
-                        {...register("password", { required: true })}
-                    />
-                    {errors.password && (
-                        <p className="error-text">비밀번호를 입력해주세요.</p>
-                    )}
-                </fieldset>
                 <fieldset>
                     <input
                         inputMode="text"
