@@ -1,4 +1,4 @@
-import { User } from "../models/user.model";
+import { User, UserChangePassword } from "../models/user.model";
 import { httpClient } from "./http";
 
 export const signup = async (userData: User) => {
@@ -14,7 +14,7 @@ export const login = async (data: User) => {
     return response.data;
 };
 
-export const changepassword = async (data: User) => {
+export const changepassword = async (data: UserChangePassword) => {
     const response = await httpClient.post<LoginResponse>(
         "/auth/changePassword",
         data

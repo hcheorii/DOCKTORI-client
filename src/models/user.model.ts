@@ -5,8 +5,7 @@ export interface User {
 }
 
 export interface UserChangePassword extends User {
-    email: string;
-    password: string;
+    token: string;
     newpassword1: string;
     newpassword2: string;
 }
