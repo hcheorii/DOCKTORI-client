@@ -1,11 +1,11 @@
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useAuth } from "../hooks/useAuth";
 import { useForm } from "react-hook-form";
-import { UserChangePassword } from "../models/user.model";
 import { useNavigate } from "react-router-dom";
-import { getToken } from "../store/authStore";
-import { useEffect } from "react";
+import { useAuth } from "../hooks/useAuth";
 import { useAlert } from "../hooks/useAlert";
+import { getToken } from "../store/authStore";
+import { UserChangePassword } from "../models/user.model";
 
 function ChangePassword() {
     const { userChangePassword } = useAuth();
@@ -18,20 +18,22 @@ function ChangePassword() {
     } = useForm<UserChangePassword>();
 
     const onSubmit = (data: UserChangePassword) => {
-        const token = getToken() as string; // 타입 단언을 사용하여 token이 string임을 명시
-        const dataWithToken = {
-            ...data,
-            token,
-        };
-        userChangePassword(dataWithToken);
+        const token = getToken();
+        if (token === null) {
+            showAlert("로그인이 필요합니다.");
+            nav("/auth/login");
+            return;
+        }
+        userChangePassword({ ...data, token });
     };
 
     useEffect(() => {
-        if (getToken() === null) {
+        const token = getToken();
+        if (token === null) {
             showAlert("로그인이 필요합니다.");
             nav("/auth/login");
         }
-    }, [nav, showAlert]); // 빈 배열을 추가하여 처음 렌더링될 때만 실행
+    }, [nav, showAlert]);
 
     return (
         <ChangePasswordStyle>
