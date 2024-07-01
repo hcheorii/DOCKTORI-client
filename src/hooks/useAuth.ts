@@ -30,7 +30,7 @@ export const useAuth = () => {
     signup(data).then(() => {
       // 성공
       showAlert('회원가입이 완료되었습니다.');
-      nav('/login');
+      nav('/auth/login');
     });
   };
 
