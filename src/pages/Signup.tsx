@@ -4,14 +4,7 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../hooks/useAuth';
 import styled from 'styled-components';
-import AuthLayout from '../components/layout/AuthLayout/AuthLayout';
-
-export interface SignupProps {
-  email: string;
-  password: string;
-  confirmPassword: string;
-  nickName: string;
-}
+import { User } from '../models/user.model';
 
 function Signup() {
   const { userSignup } = useAuth();
@@ -20,9 +13,9 @@ function Signup() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignupProps>();
+  } = useForm<User>();
 
-  const onSubmit = (data: SignupProps) => {
+  const onSubmit = (data: User) => {
     userSignup(data);
   };
 
@@ -53,22 +46,11 @@ function Signup() {
         <fieldset>
           <input
             inputMode='text'
-            placeholder='비밀번호 확인'
-            type='password'
-            {...register('confirmPassword', { required: true })}
-          />
-          {errors.confirmPassword && (
-            <p className='error-text'>비밀번호를 다시 입력해주세요.</p>
-          )}
-        </fieldset>
-        <fieldset>
-          <input
-            inputMode='text'
             placeholder='닉네임'
             type='text'
-            {...register('nickName', { required: true })}
+            {...register('nickname', { required: true })}
           />
-          {errors.nickName && (
+          {errors.nickname && (
             <p className='error-text'>닉네임을 입력해주세요.</p>
           )}
         </fieldset>

@@ -4,12 +4,7 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../hooks/useAuth';
 import styled from 'styled-components';
-import AuthLayout from '../components/layout/AuthLayout/AuthLayout';
-
-export interface LoginProps {
-  email: string;
-  password: string;
-}
+import { User } from '../models/user.model';
 
 function Login() {
   const { userLogin } = useAuth();
@@ -18,9 +13,9 @@ function Login() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginProps>();
+  } = useForm<User>();
 
-  const onSubmit = (data: LoginProps) => {
+  const onSubmit = (data: User) => {
     userLogin(data);
   };
 
