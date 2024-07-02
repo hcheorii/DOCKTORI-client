@@ -11,7 +11,7 @@ function ReadingBooks() {
 
   return (
     <BookListPageStyle>
-      <Title>읽고 있는 책</Title>
+      <Title color='first'>읽고 있는 책</Title>
       {isEmpty && <BookEmpty />}
       {!isEmpty && <BookList books={bookList} />}
     </BookListPageStyle>

@@ -17,6 +17,7 @@ import ReadingBooks from './pages/ReadingBooks';
 import ReadedBooks from './pages/ReadedBooks';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './api/queryClient';
+import BookDetail from './pages/BookDetail';
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: '/auth/changepassword',
         element: <ChangePassword />,
+      },
+      {
+        path: '/book/:bookId',
+        element: <BookDetail />,
       },
     ],
   },

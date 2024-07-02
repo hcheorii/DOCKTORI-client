@@ -7,7 +7,8 @@ export type ColorKey =
   | 'lightgray'
   | 'gray'
   | 'background'
-  | 'white';
+  | 'white'
+  | 'like';
 
 export type ButtonSize = 'large' | 'medium' | 'small';
 export type ButtonScheme = 'primary' | 'danger';
@@ -44,6 +45,7 @@ export const theme: Theme = {
     gray: 'gray',
     text: 'black',
     white: '#fff',
+    like: '#fe251b',
   },
 
   button: {

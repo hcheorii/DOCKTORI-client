@@ -9,7 +9,7 @@ function Favorite() {
   const { bookList, isBookListLoading, isEmpty } = useBookList(FAVORITE);
   return (
     <BookListPageStyle>
-      <Title>즐겨찾기</Title>
+      <Title color='first'>즐겨찾기</Title>
       {isEmpty && <BookEmpty />}
       {!isEmpty && <BookList books={bookList} />}
     </BookListPageStyle>
@@ -17,7 +17,7 @@ function Favorite() {
 }
 
 export const BookListPageStyle = styled.div`
-  padding: 30px;
+  padding: 50px;
   width: 100%;
   height: 100%;
   display: flex;
