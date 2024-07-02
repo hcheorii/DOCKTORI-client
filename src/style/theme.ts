@@ -5,7 +5,9 @@ export type ColorKey =
   | 'third'
   | 'text'
   | 'lightgray'
-  | 'background';
+  | 'gray'
+  | 'background'
+  | 'white';
 
 export type ButtonSize = 'large' | 'medium' | 'small';
 export type ButtonScheme = 'primary' | 'danger';
@@ -39,7 +41,9 @@ export const theme: Theme = {
     third: '#f3b340',
     background: '#f3f0ed',
     lightgray: 'lightgray',
+    gray: 'gray',
     text: 'black',
+    white: '#fff',
   },
 
   button: {

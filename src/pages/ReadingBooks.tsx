@@ -1,8 +1,21 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import { BookListPageStyle } from './Favorite';
+import Title from '../components/BookList/Title';
+import { useBookList } from '../hooks/useBookList';
+import { READING } from '../constants/url';
+import BookList from '../components/BookList/BookList';
+import BookEmpty from '../components/BookList/BookEmpty';
 
 function ReadingBooks() {
-    return <ReadingBooksStyle>ReadingBooks</ReadingBooksStyle>;
+  const { bookList, isBookListLoading, isEmpty } = useBookList(READING);
+
+  return (
+    <BookListPageStyle>
+      <Title>읽고 있는 책</Title>
+      {isEmpty && <BookEmpty />}
+      {!isEmpty && <BookList books={bookList} />}
+    </BookListPageStyle>
+  );
 }
 
-const ReadingBooksStyle = styled.div``;
 export default ReadingBooks;
