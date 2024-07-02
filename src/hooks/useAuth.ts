@@ -76,8 +76,8 @@ export const useAuth = () => {
     const userWithdrawal = (token: string) => {
         withdrawal({ accessToken: token }).then(
             () => {
-                showAlert("회원탈퇴가 완료되었습니다.");
                 localStorage.removeItem("token");
+                showAlert("회원탈퇴가 완료되었습니다.");
                 nav("/auth/login");
             },
             (error) => {
