@@ -45,7 +45,8 @@ export default function Navbar() {
         if (token) {
             userWithdrawal(token);
         } else {
-            console.error("No token found in localStorage");
+            showAlert("로그인이 필요합니다.");
+            nav("/auth/login");
         }
     };
 
