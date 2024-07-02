@@ -1,9 +1,14 @@
-// useAuth.ts 파일의 수정된 코드 예시
-
 import { useAuthStore } from "../store/authStore";
 import { useAlert } from "./useAlert";
 import { useNavigate } from "react-router-dom";
-import { changepassword, login, signup } from "../api/auth.api";
+import {
+    LoginResponse,
+    changepassword,
+    login,
+    logout,
+    signup,
+    withdrawal,
+} from "../api/auth.api";
 import { User, UserChangePassword } from "../models/user.model";
 
 export const useAuth = () => {
@@ -14,7 +19,6 @@ export const useAuth = () => {
     const userLogin = (data: User) => {
         login(data).then(
             (res) => {
-                // 상태 변화
                 storeLogin(res.accessToken);
                 showAlert("로그인이 성공했습니다.");
                 nav("/");
@@ -29,8 +33,21 @@ export const useAuth = () => {
     const userSignup = (data: User) => {
         signup(data).then(
             () => {
-                // 성공
                 showAlert("회원가입이 완료되었습니다.");
+                nav("/auth/login");
+            },
+            (error) => {
+                console.log(error);
+                showAlert(error.response.data.message);
+            }
+        );
+    };
+
+    const userLogout = (token: string) => {
+        logout({ accessToken: token }).then(
+            () => {
+                storeLogout();
+                showAlert("로그아웃이 완료되었습니다.");
                 nav("/auth/login");
             },
             (error) => {
@@ -56,9 +73,25 @@ export const useAuth = () => {
         );
     };
 
+    const userWithdrawal = (token: string) => {
+        withdrawal({ accessToken: token }).then(
+            () => {
+                showAlert("회원탈퇴가 완료되었습니다.");
+                localStorage.removeItem("token");
+                nav("/auth/login");
+            },
+            (error) => {
+                console.log(error);
+                showAlert(error.response.data.message);
+            }
+        );
+    };
+
     return {
         userSignup,
         userLogin,
         userChangePassword,
+        userWithdrawal,
+        userLogout,
     };
 };
