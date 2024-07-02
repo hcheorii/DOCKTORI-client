@@ -12,6 +12,7 @@ import { useState } from "react";
 import ConfirmModal from "../modal/ConfirmModal";
 import { useAuth } from "../../hooks/useAuth";
 import { useAlert } from "../../hooks/useAlert";
+import SearchModal from "../modal/SearchModal";
 
 export default function Navbar() {
     const { isloggedIn, storeLogout } = useAuthStore();
@@ -25,6 +26,9 @@ export default function Navbar() {
 
     const [showLogoutModal, setShowLogoutModal] = useState(false);
     const [showWithdrawalModal, setShowWithdrawalModal] = useState(false);
+    const [showSearchModal, setShowSearchModal] = useState(false);
+
+    const handleSearchClose = () => setShowSearchModal(false);
 
     const handleLogoutClose = () => setShowLogoutModal(false);
     const handleLogoutConfirm = () => {
@@ -69,11 +73,20 @@ export default function Navbar() {
                     <p>기존 데이터는 모두 삭제됩니다.</p>
                 </ConfirmModal>
             )}
+            {showSearchModal && (
+                <SearchModal handleClose={handleSearchClose}>
+                    <p>책을 검색하세요.</p>
+                </SearchModal>
+            )}
             <div className="item-containter">
                 <div className="logo" onClick={onClickLogo}>
                     <img src={image} alt="logo" />
                 </div>
-                <Button scheme="primary" size="large">
+                <Button
+                    onClick={() => setShowSearchModal(true)}
+                    scheme="primary"
+                    size="large"
+                >
                     <div>
                         <FaPlus /> <span>책 등록하기</span>
                     </div>
