@@ -14,3 +14,7 @@ export interface UserInfo {
     userNickname: string;
     userGoal: string;
 }
+
+export interface LogoutInfo {
+    accessToken: string;
+}
