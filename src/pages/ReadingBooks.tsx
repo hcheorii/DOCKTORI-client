@@ -7,13 +7,14 @@ import BookList from '../components/BookList/BookList';
 import BookEmpty from '../components/BookList/BookEmpty';
 
 function ReadingBooks() {
-  const { bookList, isBookListLoading, isEmpty } = useBookList(READING);
+  const { bookList, isBookListLoading, isEmpty, clickLike } =
+    useBookList(READING);
 
   return (
     <BookListPageStyle>
       <Title color='first'>읽고 있는 책</Title>
       {isEmpty && <BookEmpty />}
-      {!isEmpty && <BookList books={bookList} />}
+      {!isEmpty && <BookList books={bookList} handleLike={clickLike} />}
     </BookListPageStyle>
   );
 }

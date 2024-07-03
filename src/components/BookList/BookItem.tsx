@@ -6,9 +6,10 @@ import { IoHeartOutline, IoHeartSharp } from 'react-icons/io5';
 
 interface Props {
   book: BookListItem;
+  handleLike: (isbn: string) => void;
 }
 
-export default function BookItem({ book }: Props) {
+export default function BookItem({ book, handleLike }: Props) {
   return (
     <BookItemStyle>
       <Link to={`/book/${book.isbn}`}>
@@ -18,7 +19,7 @@ export default function BookItem({ book }: Props) {
         <p className='title'>{book.title}</p>
         <p className='author'>{book.author}</p>
         <div className='btnGroup'>
-          <button className='like'>
+          <button className='like' onClick={() => handleLike(book.isbn)}>
             {book.likeStatus ? <IoHeartSharp /> : <IoHeartOutline />}
           </button>
           {!book.readStatus && (
