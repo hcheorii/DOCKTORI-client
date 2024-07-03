@@ -38,3 +38,7 @@ export const addBook = async (params: BookSearchItem) => {
 export const toggleLike = async (isbn: string) => {
   return await httpClient.post('/book/like', { isbn });
 };
+
+export const finishBook = async (isbn: string) => {
+  return await httpClient.post('/book/finishReading', { isbn });
+};

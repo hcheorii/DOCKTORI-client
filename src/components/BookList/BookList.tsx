@@ -5,13 +5,19 @@ import BookItem from './BookItem';
 interface Props {
   books: BookListItem[];
   handleLike: (isbn: string) => void;
+  handleFinish?: (isbn: string) => void;
 }
 
-export default function BookList({ books, handleLike }: Props) {
+export default function BookList({ books, handleLike, handleFinish }: Props) {
   return (
     <BookListStyle>
       {books.map((book) => (
-        <BookItem key={book.isbn} book={book} handleLike={handleLike} />
+        <BookItem
+          key={book.isbn}
+          book={book}
+          handleLike={handleLike}
+          handleFinish={handleFinish}
+        />
       ))}
     </BookListStyle>
   );
