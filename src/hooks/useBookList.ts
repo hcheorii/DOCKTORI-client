@@ -3,17 +3,17 @@ import { fetchBookList, finishBook, toggleLike } from '../api/book.api';
 import { queryClient } from '../api/queryClient';
 
 export const useBookList = (url: string) => {
-  const { data, isLoading: isBookListLoading } = useQuery({
-    queryKey: [url],
-    queryFn: () => fetchBookList(url),
-  });
+    const { data, isLoading: isBookListLoading } = useQuery({
+        queryKey: [url],
+        queryFn: () => fetchBookList(url),
+    });
 
-  const { mutate: clickLike } = useMutation({
-    mutationFn: toggleLike,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [url] });
-    },
-  });
+    const { mutate: clickLike } = useMutation({
+        mutationFn: toggleLike,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: [url] });
+        },
+    });
 
   const { mutate: clickFinish } = useMutation({
     mutationFn: finishBook,
@@ -29,4 +29,5 @@ export const useBookList = (url: string) => {
     clickLike,
     clickFinish,
   };
+
 };
