@@ -1,212 +1,84 @@
 // Main.tsx
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Title from "../components/BookList/Title";
-import { READING, FINISH } from "../constants/url"; // FINISH URL 추가
+import { READING, FINISH } from "../constants/url";
 import { useBookList } from "../hooks/useBookList";
-import MainBookList from "../components/BookList/MainBookList";
-import BookEmpty from "../components/BookList/BookEmpty";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
-
-function Main() {
-    const {
-        bookList: readingBooks,
-        isEmpty: isReadingEmpty,
-        clickLike: clickLikeReading,
-    } = useBookList(READING);
-    const {
-        bookList: finishedBooks,
-        isEmpty: isFinishEmpty,
-        clickLike: clickLikeFinish,
-    } = useBookList(FINISH);
-
-    const [currentReadingPage, setCurrentReadingPage] = useState(0);
-    const [currentFinishPage, setCurrentFinishPage] = useState(0);
-
-    const booksPerPage = 3;
-
-    const handlePrevReading = () => {
-        if (currentReadingPage === 0) return;
-        setCurrentReadingPage(currentReadingPage - 1);
-    };
-
-    const handleNextReading = () => {
-        const indexOfLastBook = (currentReadingPage + 1) * booksPerPage;
-        const totalBooks = readingBooks.length;
-        if (indexOfLastBook >= totalBooks) return;
-        setCurrentReadingPage(currentReadingPage + 1);
-    };
-
-    const handlePrevFinish = () => {
-        if (currentFinishPage === 0) return;
-        setCurrentFinishPage(currentFinishPage - 1);
-    };
-
-    const handleNextFinish = () => {
-        const indexOfLastBook = (currentFinishPage + 1) * booksPerPage;
-        const totalBooks = finishedBooks.length;
-        if (indexOfLastBook >= totalBooks) return;
-        setCurrentFinishPage(currentFinishPage + 1);
-    };
-
-    const handleReadingIndicator = (index: number) => {
-        setCurrentReadingPage(index);
-    };
-
-    const handleFinishIndicator = (index: number) => {
-        setCurrentFinishPage(index);
-    };
+import MainBookListSection from "../components/BookList/Main/MainBookListSection";
+const Main: React.FC = () => {
+    const { bookList: readingBooks, isEmpty: isReadingEmpty } =
+        useBookList(READING);
+    const { bookList: finishedBooks, isEmpty: isFinishEmpty } =
+        useBookList(FINISH);
 
     return (
         <MainStyle>
             <div className="user">
                 <div>
-                    <Title color="first">목표</Title>
-                    <div>목표 박스</div>
+                    <p>목표</p>
+                    <div className="goal"></div>
                 </div>
                 <div>
-                    <Title color="first">나의 기록</Title>
-                    <div>나의 기록 박스</div>
+                    <p>나의 기록</p>
+                    <div className="record">
+                        <div>
+                            <div className="sub_title">읽는 중</div>
+                            <div className="len">{readingBooks.length}권</div>
+                        </div>
+                        <div>
+                            <div className="sub_title">완독</div>
+                            <div className="len">{finishedBooks.length}권</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div className="reading">
-                <Title color="first">
-                    읽고 있는 책{isReadingEmpty && <BookEmpty />}
-                </Title>
-                {!isReadingEmpty && (
-                    <>
-                        <MainBookList
-                            books={readingBooks.slice(
-                                currentReadingPage * booksPerPage,
-                                (currentReadingPage + 1) * booksPerPage
-                            )}
-                            handleLike={clickLikeReading}
-                        />
-                        <div className="btnGroup">
-                            <button onClick={handlePrevReading}>
-                                <FaAngleLeft />
-                            </button>
-                            <BannerIndicatorStyle>
-                                {Array.from({
-                                    length: Math.ceil(
-                                        readingBooks.length / booksPerPage
-                                    ),
-                                }).map((_, index) => (
-                                    <span
-                                        key={index}
-                                        onClick={() =>
-                                            handleReadingIndicator(index)
-                                        }
-                                        className={
-                                            index === currentReadingPage
-                                                ? "active"
-                                                : ""
-                                        }
-                                    ></span>
-                                ))}
-                            </BannerIndicatorStyle>
-                            <button onClick={handleNextReading}>
-                                <FaAngleRight />
-                            </button>
-                        </div>
-                    </>
-                )}
-            </div>
-            <div className="readed">
-                <Title color="first">
-                    다 읽은 책{isFinishEmpty && <BookEmpty />}
-                </Title>
-                {!isFinishEmpty && (
-                    <>
-                        <MainBookList
-                            books={finishedBooks.slice(
-                                currentFinishPage * booksPerPage,
-                                (currentFinishPage + 1) * booksPerPage
-                            )}
-                            handleLike={clickLikeFinish}
-                        />
-                        <div className="btnGroup">
-                            <button onClick={handlePrevFinish}>
-                                <FaAngleLeft />
-                            </button>
-                            <BannerIndicatorStyle>
-                                {Array.from({
-                                    length: Math.ceil(
-                                        finishedBooks.length / booksPerPage
-                                    ),
-                                }).map((_, index) => (
-                                    <span
-                                        key={index}
-                                        onClick={() =>
-                                            handleFinishIndicator(index)
-                                        }
-                                        className={
-                                            index === currentFinishPage
-                                                ? "active"
-                                                : ""
-                                        }
-                                    ></span>
-                                ))}
-                            </BannerIndicatorStyle>
-                            <button onClick={handleNextFinish}>
-                                <FaAngleRight />
-                            </button>
-                        </div>
-                    </>
-                )}
-            </div>
+            <MainBookListSection
+                title="읽고 있는 책"
+                books={readingBooks}
+                isEmpty={isReadingEmpty}
+            />
+            <MainBookListSection
+                title="다 읽은 책"
+                books={finishedBooks}
+                isEmpty={isFinishEmpty}
+            />
         </MainStyle>
     );
-}
+};
 
 const MainStyle = styled.div`
-    width: 100%;
+    width: 80%;
     display: flex;
     flex-direction: column;
-    .reading {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-    }
-    .readed {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-    }
-    button {
-        border: 0;
-        width: 40px;
-        height: 40px;
-        background: none;
+    justify-content: center;
+    margin: 0 auto;
 
-        svg {
-            fill: ${({ theme }) => theme.color.first};
-        }
+    .goal,
+    .record {
+        border: 1px solid ${({ theme }) => theme.color.second};
+        border-radius: ${({ theme }) => theme.borderRadius.medium};
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        background: ${({ theme }) => theme.color.white};
+        padding: 40px;
+        font-size: 1.5rem;
     }
-    .btnGroup {
+
+    .sub_title {
+        font-weight: bold;
+    }
+    .record {
         display: flex;
-        gap: 15px;
+        gap: 20px;
     }
-`;
-
-const BannerIndicatorStyle = styled.div`
-    display: flex;
-    align-items: center;
-    span {
-        display: inline-block;
-        width: 16px;
-        height: 16px;
-        border-radius: 100px;
-        background: #fff;
-        margin: 0 4px;
-        cursor: pointer;
-
-        &.active {
-            background: ${({ theme }) => theme.color.first};
+    .user {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        p {
+            font-size: 1.2rem;
+            color: ${({ theme }) => theme.color.first};
+            font-weight: bold;
+            margin: 0;
         }
     }
 `;
