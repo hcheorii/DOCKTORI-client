@@ -1,8 +1,11 @@
+import { BookSearchItem } from './../models/book.model';
 import { useState } from 'react';
 import { addBook, fetchSearchBookList } from '../api/book.api';
-import { BookSearchItem } from '../models/book.model';
 import { useAlert } from './useAlert';
 import { useNavigate } from 'react-router-dom';
+import { queryClient } from '../api/queryClient';
+import { READING } from '../constants/url';
+import { useMutation } from '@tanstack/react-query';
 
 export const useSearchBooks = () => {
   const [books, setBooks] = useState<BookSearchItem[]>([]);
@@ -25,15 +28,17 @@ export const useSearchBooks = () => {
     }
   };
 
-  const addSearchBook = async (book: BookSearchItem) => {
-    try {
-      await addBook(book);
+  const { mutate: addSearchBook } = useMutation({
+    mutationFn: (book: BookSearchItem) => addBook(book),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [READING] });
       showAlert('책 등록이 완료되었습니다.');
       nav('/readingbooks');
-    } catch (error) {
+    },
+    onError: (error: Error) => {
       console.log('책 등록 중 오류가 발생했습니다.', error);
-    }
-  };
+    },
+  });
 
   return { books, loading, error, searchBooks, addSearchBook };
 };
