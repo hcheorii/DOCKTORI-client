@@ -6,13 +6,19 @@ import BookList from '../components/BookList/BookList';
 import BookEmpty from '../components/BookList/BookEmpty';
 
 function Favorite() {
-  const { bookList, isBookListLoading, isEmpty, clickLike } =
+  const { bookList, isBookListLoading, isEmpty, clickLike, clickFinish } =
     useBookList(FAVORITE);
   return (
     <BookListPageStyle>
       <Title color='first'>즐겨찾기</Title>
       {isEmpty && <BookEmpty />}
-      {!isEmpty && <BookList books={bookList} handleLike={clickLike} />}
+      {!isEmpty && (
+        <BookList
+          books={bookList}
+          handleLike={clickLike}
+          handleFinish={clickFinish}
+        />
+      )}
     </BookListPageStyle>
   );
 }
