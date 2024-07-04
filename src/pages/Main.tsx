@@ -1,10 +1,10 @@
 // Main.tsx
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { FINISH } from "../constants/url";
-import { useBookList } from "../hooks/useBookList";
 import MainBookListSection from "../components/BookList/Main/MainBookListSection";
-import { useMain } from "../hooks/useMain";
+import Button from "../components/common/Button";
+import ChangeNicknameModal from "../components/modal/ChangeNicknameModal";
+import { useAuth } from "../hooks/useAuth";
 
 const Main: React.FC = () => {
     const {
@@ -16,16 +16,41 @@ const Main: React.FC = () => {
         bookFinishedCount,
         isReadingEmpty,
         isFinishEmpty,
-    } = useMain();
+        getMainData, // 가져오기 함수 추가
+    } = useAuth();
+
+    const [showModal, setShowModal] = useState(false); // 모달 상태를 관리하는 state
+
+    const handleOpenModal = () => {
+        setShowModal(true); // 모달 열기
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false); // 모달 닫기
+    };
+
+    useEffect(() => {
+        const token = localStorage.getItem("token") as string; // 토큰을 실제로 가져오는 로직 추가
+        getMainData(token); // 초기 렌더링 시 데이터 가져오기
+    }, []);
 
     return (
         <MainStyle>
-            <div className="user">
+            <div className="main">
                 <div>
                     <p>목표</p>
-                    <div className="goal">
-                        {userNickname}
-                        {userGoal}
+                    <div className="user">
+                        <div className="nickname">
+                            {userNickname}
+                            <Button
+                                size={"small"}
+                                scheme={"primary"}
+                                onClick={handleOpenModal}
+                            >
+                                목표 변경
+                            </Button>
+                        </div>
+                        <div className="goal">{userGoal}</div>
                     </div>
                 </div>
                 <div>
@@ -52,6 +77,14 @@ const Main: React.FC = () => {
                 books={bookFinished}
                 isEmpty={isFinishEmpty}
             />
+            {showModal && (
+                <ChangeNicknameModal
+                    handleClose={handleCloseModal}
+                    showModal={showModal}
+                >
+                    <p>새로운 닉네임과 목표를 입력하세요.</p>
+                </ChangeNicknameModal>
+            )}
         </MainStyle>
     );
 };
@@ -63,7 +96,13 @@ const MainStyle = styled.div`
     justify-content: center;
     margin: 0 auto;
 
-    .goal,
+    .user {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .user,
     .record {
         border: 1px solid ${({ theme }) => theme.color.second};
         border-radius: ${({ theme }) => theme.borderRadius.medium};
@@ -73,6 +112,14 @@ const MainStyle = styled.div`
         font-size: 1.5rem;
     }
 
+    .nickname {
+        font-weight: bold;
+        display: flex;
+        gap: 20px;
+    }
+    .goal {
+        font-size: 1rem;
+    }
     .sub_title {
         font-weight: bold;
     }
@@ -80,7 +127,7 @@ const MainStyle = styled.div`
         display: flex;
         gap: 20px;
     }
-    .user {
+    .main {
         display: flex;
         justify-content: space-between;
         margin-bottom: 20px;

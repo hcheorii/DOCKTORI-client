@@ -18,3 +18,14 @@ export interface UserInfo {
 export interface LogoutInfo {
     accessToken: string;
 }
+export interface LoginResponse {
+    accessToken: string; // 로그인 시 생성된 토큰
+}
+
+export interface LogoutResponse {
+    clearCookie: string;
+}
+export interface ChangeNickNameProps {
+    cNickname: string;
+    cGoal: string;
+}

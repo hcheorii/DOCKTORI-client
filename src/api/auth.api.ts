@@ -1,4 +1,11 @@
-import { LogoutInfo, User, UserChangePassword } from "../models/user.model";
+import {
+    ChangeNickNameProps,
+    LoginResponse,
+    LogoutInfo,
+    LogoutResponse,
+    User,
+    UserChangePassword,
+} from "../models/user.model";
 import { httpClient } from "./http";
 
 // 회원 가입 함수
@@ -6,14 +13,6 @@ export const signup = async (userData: User) => {
     const response = await httpClient.post("/auth/join", userData);
     console.log(response.data);
 };
-
-export interface LoginResponse {
-    accessToken: string; // 로그인 시 생성된 토큰
-}
-
-export interface LogoutResponse {
-    clearCookie: string;
-}
 
 // 로그인 함수
 export const login = async (data: User) => {
@@ -47,5 +46,14 @@ export const withdrawal = async (data: LoginResponse) => {
             data: data, // 요청 본문에 데이터를 포함시킵니다.
         }
     );
+    return response.data;
+};
+
+export const changeNickname = async (data: ChangeNickNameProps) => {
+    const response = await httpClient.post<ChangeNickNameProps>(
+        "/home/changeGoal",
+        data
+    );
+
     return response.data;
 };
