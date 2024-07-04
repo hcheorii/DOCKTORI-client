@@ -48,6 +48,7 @@ const SearchModal: React.FC<Props> = ({ children, handleClose, showModal }) => {
                             onChange={(e) => setQuery(e.target.value)}
                             placeholder="책 제목을 입력하세요"
                             onKeyDown={handleKeyDown}
+                            autoFocus
                         />
                         <Button
                             size="medium"

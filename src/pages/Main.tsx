@@ -1,45 +1,55 @@
 // Main.tsx
 import React from "react";
 import styled from "styled-components";
-import Title from "../components/BookList/Title";
-import { READING, FINISH } from "../constants/url";
+import { FINISH } from "../constants/url";
 import { useBookList } from "../hooks/useBookList";
 import MainBookListSection from "../components/BookList/Main/MainBookListSection";
+import { useMain } from "../hooks/useMain";
+
 const Main: React.FC = () => {
-    const { bookList: readingBooks, isEmpty: isReadingEmpty } =
-        useBookList(READING);
-    const { bookList: finishedBooks, isEmpty: isFinishEmpty } =
-        useBookList(FINISH);
+    const {
+        bookReading,
+        bookFinished,
+        userNickname,
+        userGoal,
+        bookReadingCount,
+        bookFinishedCount,
+        isReadingEmpty,
+        isFinishEmpty,
+    } = useMain();
 
     return (
         <MainStyle>
             <div className="user">
                 <div>
                     <p>목표</p>
-                    <div className="goal"></div>
+                    <div className="goal">
+                        {userNickname}
+                        {userGoal}
+                    </div>
                 </div>
                 <div>
                     <p>나의 기록</p>
                     <div className="record">
                         <div>
                             <div className="sub_title">읽는 중</div>
-                            <div className="len">{readingBooks.length}권</div>
+                            <div className="len">{bookReadingCount}권</div>
                         </div>
                         <div>
                             <div className="sub_title">완독</div>
-                            <div className="len">{finishedBooks.length}권</div>
+                            <div className="len">{bookFinishedCount}권</div>
                         </div>
                     </div>
                 </div>
             </div>
             <MainBookListSection
                 title="읽고 있는 책"
-                books={readingBooks}
+                books={bookReading}
                 isEmpty={isReadingEmpty}
             />
             <MainBookListSection
                 title="다 읽은 책"
-                books={finishedBooks}
+                books={bookFinished}
                 isEmpty={isFinishEmpty}
             />
         </MainStyle>
