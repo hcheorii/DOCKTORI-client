@@ -24,3 +24,9 @@ export interface BookDetail {
   bookReview: string;
   bookScore: number;
 }
+
+export interface ChangeDateProps {
+  isbn: string;
+  sDate: string;
+  eDate: string;
+}
