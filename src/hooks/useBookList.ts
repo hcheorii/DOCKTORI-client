@@ -13,14 +13,14 @@ export const useBookList = (url: string) => {
   const { mutate: clickLike } = useMutation({
     mutationFn: toggleLike,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [url] });
+      queryClient.invalidateQueries({ queryKey: ['bookList', url] });
     },
   });
 
   const { mutate: clickFinish } = useMutation({
     mutationFn: finishBook,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [url] });
+      queryClient.invalidateQueries({ queryKey: ['bookList', url] });
     },
   });
 

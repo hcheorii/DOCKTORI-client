@@ -31,7 +31,7 @@ export const useSearchBooks = () => {
   const { mutate: addSearchBook } = useMutation({
     mutationFn: (book: BookSearchItem) => addBook(book),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [READING] });
+      queryClient.invalidateQueries({ queryKey: ['bookList', READING] });
       showAlert('책 등록이 완료되었습니다.');
       nav('/readingbooks');
     },
