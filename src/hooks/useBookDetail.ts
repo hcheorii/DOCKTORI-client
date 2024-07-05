@@ -1,7 +1,17 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { changeDate, deleteBook, fetchBookDetail } from '../api/book.api';
+import {
+  addRemind,
+  changeDate,
+  deleteBook,
+  deleteRemind,
+  fetchBookDetail,
+} from '../api/book.api';
 import { useNavigate } from 'react-router-dom';
-import { ChangeDateProps } from '../models/book.model';
+import {
+  AddRemindProps,
+  ChangeDateProps,
+  DeleteRemindProps,
+} from '../models/book.model';
 import { queryClient } from '../api/queryClient';
 
 export const useBookDetail = (isbn: string) => {
@@ -27,5 +37,26 @@ export const useBookDetail = (isbn: string) => {
     },
   });
 
-  return { book, isBookLoading, handleDeleteBook, handleChangeDate };
+  const { mutate: handleAddRemind } = useMutation({
+    mutationFn: (data: AddRemindProps) => addRemind(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['bookDetail', isbn] });
+    },
+  });
+
+  const { mutate: handleDeleteRemind } = useMutation({
+    mutationFn: (data: DeleteRemindProps) => deleteRemind(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['bookDetail', isbn] });
+    },
+  });
+
+  return {
+    book,
+    isBookLoading,
+    handleDeleteBook,
+    handleChangeDate,
+    handleAddRemind,
+    handleDeleteRemind,
+  };
 };

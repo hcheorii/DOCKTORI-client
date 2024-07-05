@@ -7,8 +7,14 @@ import BookReview from '../components/BookDetail/BookReview';
 
 export default function BookDetail() {
   const { bookId: isbn } = useParams();
-  const { book, isBookLoading, handleDeleteBook, handleChangeDate } =
-    useBookDetail(isbn!);
+  const {
+    book,
+    isBookLoading,
+    handleDeleteBook,
+    handleChangeDate,
+    handleAddRemind,
+    handleDeleteRemind,
+  } = useBookDetail(isbn!);
 
   return (
     <BookDetailStyle>
@@ -20,7 +26,12 @@ export default function BookDetail() {
             handleDelete={handleDeleteBook}
             handleChangeDate={handleChangeDate}
           />
-          <BookRemind />
+          <BookRemind
+            isbn={isbn!}
+            reminds={book!.bookRemind}
+            handleAddRemind={handleAddRemind}
+            handleDeleteRemind={handleDeleteRemind}
+          />
           <BookReview />
         </>
       )}
@@ -35,5 +46,7 @@ const BookDetailStyle = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 25px;
   align-items: center;
+  overflow-y: scroll;
 `;

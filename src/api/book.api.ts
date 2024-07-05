@@ -1,8 +1,10 @@
 import {
+  AddRemindProps,
   BookDetail,
   BookListItem,
   BookSearchItem,
   ChangeDateProps,
+  DeleteRemindProps,
 } from '../models/book.model';
 import { httpClient } from './http';
 
@@ -62,4 +64,12 @@ export const deleteBook = async (isbn: string) => {
 
 export const changeDate = async (data: ChangeDateProps) => {
   return await httpClient.post('/book/changeDate', data);
+};
+
+export const addRemind = async (data: AddRemindProps) => {
+  return await httpClient.put('/book/remind', data);
+};
+
+export const deleteRemind = async (data: DeleteRemindProps) => {
+  return await httpClient.delete('/book/deleteRemind', { data });
 };

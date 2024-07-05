@@ -30,3 +30,13 @@ export interface ChangeDateProps {
   sDate: string;
   eDate: string;
 }
+
+export interface AddRemindProps {
+  isbn: string;
+  context: string;
+}
+
+export interface DeleteRemindProps {
+  isbn: string;
+  index: number;
+}
