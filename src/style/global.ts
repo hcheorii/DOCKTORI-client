@@ -11,5 +11,9 @@ export const GlobalStyle = createGlobalStyle`
         margin : 0;
     }
 
+    ul{
+      list-style: none;
+      padding: 0;
+    }
 `;
 //타입이 dark인지 light 인지에 따라 black or white 로 설정

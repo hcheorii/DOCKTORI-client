@@ -24,3 +24,19 @@ export interface BookDetail {
   bookReview: string;
   bookScore: number;
 }
+
+export interface ChangeDateProps {
+  isbn: string;
+  sDate: string;
+  eDate: string;
+}
+
+export interface AddRemindProps {
+  isbn: string;
+  context: string;
+}
+
+export interface DeleteRemindProps {
+  isbn: string;
+  index: number;
+}
