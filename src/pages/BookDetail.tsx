@@ -14,6 +14,7 @@ export default function BookDetail() {
     handleChangeDate,
     handleAddRemind,
     handleDeleteRemind,
+    handleAddReview,
   } = useBookDetail(isbn!);
 
   return (
@@ -32,7 +33,12 @@ export default function BookDetail() {
             handleAddRemind={handleAddRemind}
             handleDeleteRemind={handleDeleteRemind}
           />
-          <BookReview />
+          <BookReview
+            isbn={isbn!}
+            review={book!.bookReview}
+            score={book!.bookScore}
+            handleAddReview={handleAddReview}
+          />
         </>
       )}
     </BookDetailStyle>

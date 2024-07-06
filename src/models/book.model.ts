@@ -40,3 +40,7 @@ export interface DeleteRemindProps {
   isbn: string;
   index: number;
 }
+
+export interface AddReviewProps extends AddRemindProps {
+  score: number;
+}

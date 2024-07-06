@@ -1,5 +1,6 @@
 import {
   AddRemindProps,
+  AddReviewProps,
   BookDetail,
   BookListItem,
   BookSearchItem,
@@ -72,4 +73,8 @@ export const addRemind = async (data: AddRemindProps) => {
 
 export const deleteRemind = async (data: DeleteRemindProps) => {
   return await httpClient.delete('/book/deleteRemind', { data });
+};
+
+export const AddReview = async (data: AddReviewProps) => {
+  return await httpClient.post('/book/review', data);
 };

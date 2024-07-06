@@ -3,6 +3,8 @@ import Title from '../BookList/Title';
 import React, { useState } from 'react';
 import { AddRemindProps, DeleteRemindProps } from '../../models/book.model';
 import { FaTrashAlt } from 'react-icons/fa';
+import BookDetailForm from './BookDetailForm';
+import BookDetailContent from './BookDetailContent';
 
 interface Props {
   isbn: string;
@@ -17,41 +19,28 @@ export default function BookRemind({
   handleAddRemind,
   handleDeleteRemind,
 }: Props) {
-  const [text, setText] = useState('');
-
-  const handleRemindSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!text || !text.trim()) {
-      setText('');
-      return;
-    }
-
+  const onSubmit = (content: string) => {
     handleAddRemind({
       isbn,
-      context: text,
+      context: content,
     });
-
-    setText('');
   };
 
   return (
     <BookRemindStyle>
       <Title color='first'>기억하고 싶은 구절</Title>
-      <form className='editor' onSubmit={handleRemindSubmit}>
-        <textarea
-          placeholder='기억하고 싶은 구절을 기록해보세요.'
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-        <button>추가</button>
-      </form>
+      <BookDetailForm
+        placeholder='기억하고 싶은 구절을 기록해보세요'
+        onSubmit={onSubmit}
+      />
       <ul className='reminds'>
         {reminds.map((remind, index) => (
-          <li key={index} className='remind'>
-            <p>{remind}</p>
-            <button onClick={() => handleDeleteRemind({ isbn, index })}>
-              <FaTrashAlt />
-            </button>
+          <li key={index}>
+            <BookDetailContent
+              content={remind}
+              icon={<FaTrashAlt />}
+              onClick={() => handleDeleteRemind({ isbn, index })}
+            />
           </li>
         ))}
       </ul>
@@ -114,43 +103,8 @@ const BookRemindStyle = styled.div`
     align-items: center;
     gap: 8px;
 
-    .remind {
-      position: relative;
-      padding: 36px;
-      border: 2px solid ${({ theme }) => theme.color.second};
-      border-radius: ${({ theme }) => theme.borderRadius.medium};
+    li {
       width: 100%;
-      min-height: 50px;
-
-      p {
-        margin: 0;
-      }
-
-      button {
-        position: absolute;
-        bottom: 8px;
-        right: 8px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: ${({ theme }) => theme.color.third};
-        border: none;
-        border-radius: ${({ theme }) => theme.borderRadius.rounded};
-        width: 1.8rem;
-        height: 1.8rem;
-        cursor: pointer;
-        transition: all 200ms ease-in-out;
-
-        svg {
-          font-size: 1.1rem;
-          fill: ${({ theme }) => theme.color.white};
-        }
-
-        &:hover {
-          background: ${({ theme }) => theme.color.like};
-          transform: rotate(15deg);
-        }
-      }
     }
   }
 `;
