@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import {
   addRemind,
+  AddReview,
   changeDate,
   deleteBook,
   deleteRemind,
@@ -9,6 +10,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import {
   AddRemindProps,
+  AddReviewProps,
   ChangeDateProps,
   DeleteRemindProps,
 } from '../models/book.model';
@@ -51,6 +53,13 @@ export const useBookDetail = (isbn: string) => {
     },
   });
 
+  const { mutate: handleAddReview } = useMutation({
+    mutationFn: (data: AddReviewProps) => AddReview(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['bookDetail', isbn] });
+    },
+  });
+
   return {
     book,
     isBookLoading,
@@ -58,5 +67,6 @@ export const useBookDetail = (isbn: string) => {
     handleChangeDate,
     handleAddRemind,
     handleDeleteRemind,
+    handleAddReview,
   };
 };
