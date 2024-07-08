@@ -1,14 +1,13 @@
-// MainBookList.tsx
+import React from "react";
 import styled from "styled-components";
 import { BookListItem } from "../../../models/book.model";
-
 import MainBookItem from "./MainBookItem";
 
 interface Props {
     books: BookListItem[];
 }
 
-export default function MainBookList({ books }: Props) {
+const MainBookList: React.FC<Props> = ({ books }) => {
     return (
         <MainBookListStyle>
             {books.map((book) => (
@@ -16,7 +15,7 @@ export default function MainBookList({ books }: Props) {
             ))}
         </MainBookListStyle>
     );
-}
+};
 
 const MainBookListStyle = styled.div`
     width: 100%;
@@ -24,3 +23,5 @@ const MainBookListStyle = styled.div`
     grid-template-columns: repeat(3, 1fr);
     gap: 25px;
 `;
+
+export default MainBookList;

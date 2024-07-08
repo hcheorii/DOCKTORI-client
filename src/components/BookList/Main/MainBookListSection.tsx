@@ -1,4 +1,3 @@
-// BookListSection.tsx
 import React, { useState } from "react";
 import styled from "styled-components";
 import MainBookList from "./MainBookList";
@@ -110,7 +109,6 @@ const BookListSectionStyle = styled.div`
         }
     }
 `;
-
 const IndicatorStyle = styled.div`
     display: flex;
     align-items: center;
@@ -128,5 +126,4 @@ const IndicatorStyle = styled.div`
         }
     }
 `;
-
 export default MainBookListSection;

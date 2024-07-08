@@ -49,10 +49,10 @@ export const useAuthStore = create<StoreState>((set) => ({
                 accessToken,
             } as UserNicknameProps);
             const goal = response.data.userGoal;
-            if (goal) {
-                set({ userGoal: goal });
-            } else {
+            if (!goal) {
                 set({ userGoal: "목표를 설정해주세요." });
+            } else {
+                set({ userGoal: goal });
             }
         } catch (error) {
             console.error("Failed to fetch goal", error);

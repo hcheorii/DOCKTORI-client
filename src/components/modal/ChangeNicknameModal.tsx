@@ -47,12 +47,14 @@ const ChangeNicknameModal: React.FC<Props> = ({
                             onChange={(e) => setNewNickname(e.target.value)}
                             placeholder="새로운 닉네임을 입력하세요"
                             autoFocus
+                            maxLength={10}
                         />
                         <input
                             type="text"
                             value={newGoal}
                             onChange={(e) => setNewGoal(e.target.value)}
                             placeholder="새로운 목표를 입력하세요."
+                            maxLength={20}
                             style={{ width: "100%" }} // 입력창의 가로 길이를 100%로 설정
                         />
                         <button onClick={handleSubmit}>변경</button>

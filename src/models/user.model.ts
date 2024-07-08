@@ -46,3 +46,7 @@ export interface ChangeNickNameProps {
     cNickname: string;
     cGoal: string;
 }
+export interface ChangeNickNameResponse {
+    userNickname: string;
+    userGoal: string;
+}
