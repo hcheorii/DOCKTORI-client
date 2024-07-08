@@ -4,6 +4,7 @@ import { useBookList } from '../hooks/useBookList';
 import { FAVORITE } from '../constants/url';
 import BookList from '../components/BookList/BookList';
 import BookEmpty from '../components/BookList/BookEmpty';
+import Loading from '../components/common/Loading';
 
 function Favorite() {
   const { bookList, isBookListLoading, isEmpty, clickLike, clickFinish } =
@@ -13,6 +14,7 @@ function Favorite() {
     <BookListPageStyle>
       <Title color='first'>즐겨찾기</Title>
       {isEmpty && <BookEmpty />}
+      {!isEmpty && isBookListLoading && <Loading />}
       {!isEmpty && (
         <BookList
           books={bookList}
@@ -26,25 +28,11 @@ function Favorite() {
 
 export const BookListPageStyle = styled.div`
   padding: 50px;
-  width: 100%;
+  width: 90%;
   height: 100%;
   display: flex;
   flex-direction: column;
   gap: 30px;
-  overflow-y: scroll;
-
-  &::-webkit-scrollbar {
-    width: 8px;
-    display: block;
-  }
-
-  &::-webkit-scrollbar-track {
-    display: none;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: ${({ theme }) => theme.color.third};
-    border-radius: ${({ theme }) => theme.borderRadius.medium};
-  }
+  overflow-y: auto;
 `;
 export default Favorite;

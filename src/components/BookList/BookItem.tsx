@@ -38,6 +38,7 @@ export default function BookItem({ book, handleLike, handleFinish }: Props) {
 }
 
 const BookItemStyle = styled.div`
+  min-width: 300px;
   display: flex;
   align-items: center;
   padding: 12px 16px;
@@ -74,6 +75,10 @@ const BookItemStyle = styled.div`
 
     p {
       margin: 0;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      -webkit-line-clamp: 1;
     }
 
     .title {
