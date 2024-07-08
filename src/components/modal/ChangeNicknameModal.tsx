@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FaPlus } from "react-icons/fa6";
 import { useAuth } from "../../hooks/useAuth";
 import { createPortal } from "react-dom";
+import { useAuthStore } from "../../store/authStore";
 
 interface Props {
     children: React.ReactNode;
@@ -15,19 +16,20 @@ const ChangeNicknameModal: React.FC<Props> = ({
     handleClose,
     showModal,
 }) => {
-    const { userNickname: initialNickname, userGoal: initialGoal } = useAuth();
+    const { userNickname, userGoal } = useAuthStore();
     const { userChangeNickname } = useAuth();
-    const [newNickname, setNewNickname] = useState<string>(initialNickname);
-    const [newGoal, setNewGoal] = useState<string>(initialGoal);
+    const [newNickname, setNewNickname] = useState<string>(userNickname);
+    const [newGoal, setNewGoal] = useState<string>(userGoal);
 
     useEffect(() => {
         if (showModal) {
-            setNewNickname(initialNickname);
-            setNewGoal(initialGoal);
+            setNewNickname(userNickname);
+            setNewGoal(userGoal);
         }
-    }, [showModal, initialNickname, initialGoal]);
+    }, [showModal, userNickname, userGoal]);
 
     const handleSubmit = () => {
+        console.log(newGoal);
         userChangeNickname({ cNickname: newNickname, cGoal: newGoal });
         handleClose();
     };

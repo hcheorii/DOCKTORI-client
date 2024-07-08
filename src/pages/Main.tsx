@@ -5,13 +5,12 @@ import MainBookListSection from "../components/BookList/Main/MainBookListSection
 import Button from "../components/common/Button";
 import ChangeNicknameModal from "../components/modal/ChangeNicknameModal";
 import { useAuth } from "../hooks/useAuth";
+import { useAuthStore } from "../store/authStore";
 
 const Main: React.FC = () => {
     const {
         bookReading,
         bookFinished,
-        userNickname,
-        userGoal,
         bookReadingCount,
         bookFinishedCount,
         isReadingEmpty,
@@ -19,6 +18,7 @@ const Main: React.FC = () => {
         getMainData, // 가져오기 함수 추가
     } = useAuth();
 
+    const { userNickname, userGoal } = useAuthStore();
     const [showModal, setShowModal] = useState(false); // 모달 상태를 관리하는 state
 
     const handleOpenModal = () => {
