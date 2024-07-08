@@ -1,5 +1,6 @@
 import {
     ChangeNickNameProps,
+    ChangeNickNameResponse,
     LoginResponse,
     LogoutInfo,
     LogoutResponse,
@@ -54,7 +55,7 @@ export const withdrawal = async (data: LoginResponse) => {
 };
 
 export const changeNickname = async (data: ChangeNickNameProps) => {
-    const response = await httpClient.post<ChangeNickNameProps>(
+    const response = await httpClient.post<ChangeNickNameResponse>(
         "/home/changeGoal",
         data
     );
