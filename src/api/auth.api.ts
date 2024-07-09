@@ -14,7 +14,6 @@ import { httpClient } from "./http";
 // 회원 가입 함수
 export const signup = async (userData: SignupInfo) => {
     const response = await httpClient.post("/auth/join", userData);
-    console.log(response.data);
 };
 
 // 로그인 함수
@@ -43,7 +42,7 @@ export const withdrawal = async (data: LoginResponse) => {
     const response = await httpClient.delete<LoginResponse>(
         "/auth/cancelAccount",
         {
-            data: data, // 요청 본문에 데이터를 포함시킵니다.
+            data: data,
         }
     );
     return response.data;

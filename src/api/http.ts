@@ -1,6 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { getToken, removeToken } from "../store/authStore";
-// API 요청의 기본 URL
 const BASE_URL =
     "https://port-0-docktori-server-ly5qmhc1cd365acd.sel5.cloudtype.app";
 const DEFAULT_TIMEOUT = 30000;
