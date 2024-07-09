@@ -27,4 +27,5 @@ const ContentContainer = styled.div`
   width: 95vw;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* 박스 쉐도우 추가 */
   border-radius: 12px; /* border-radius 추가 */
+  overflow: hidden;
 `;
