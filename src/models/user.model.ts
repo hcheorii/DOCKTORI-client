@@ -21,9 +21,6 @@ export interface UserInfo {
   userGoal: string;
 }
 
-export interface UserNicknameProps {
-  accessToken: string;
-}
 export interface UserNicknameResponse {
   userNickname: string;
 }
@@ -31,6 +28,7 @@ export interface UserNicknameResponse {
 export interface UserGoalResponse {
   userGoal: string;
 }
+
 export interface LogoutInfo {
   accessToken: string;
 }
@@ -41,11 +39,13 @@ export interface LoginResponse {
 export interface LogoutResponse {
   clearCookie: string;
 }
-export interface ChangeNickNameProps {
+
+export interface ChangeUserInfoProps {
   cNickname: string;
   cGoal: string;
 }
-export interface ChangeNickNameResponse {
+
+export interface ChangeUserInfoResponse {
   userNickname: string;
   userGoal: string;
 }

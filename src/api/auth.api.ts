@@ -1,6 +1,6 @@
 import {
-  ChangeNickNameProps,
-  ChangeNickNameResponse,
+  ChangeUserInfoProps,
+  ChangeUserInfoResponse,
   LoginResponse,
   LogoutInfo,
   LogoutResponse,
@@ -8,7 +8,6 @@ import {
   User,
   UserChangePassword,
   UserGoalResponse,
-  UserNicknameProps,
   UserNicknameResponse,
 } from '../models/user.model';
 import { httpClient } from './http';
@@ -51,8 +50,9 @@ export const withdrawal = async (data: LoginResponse) => {
   return response.data;
 };
 
-export const changeNickname = async (data: ChangeNickNameProps) => {
-  const response = await httpClient.post<ChangeNickNameResponse>(
+// 닉네임, 목표 변경 api
+export const changeUserInfo = async (data: ChangeUserInfoProps) => {
+  const response = await httpClient.post<ChangeUserInfoResponse>(
     '/home/changeGoal',
     data
   );
@@ -60,19 +60,14 @@ export const changeNickname = async (data: ChangeNickNameProps) => {
   return response.data;
 };
 
-export const fetchNickname = async (params: UserNicknameProps) => {
-  const response = await httpClient.get<UserNicknameResponse>(
-    '/home/nickname',
-    {
-      params,
-    }
-  );
-  return response;
+// 닉네임 fetch api
+export const fetchNickname = async () => {
+  const response = await httpClient.get<UserNicknameResponse>('/home/nickname');
+  return response.data;
 };
 
-export const fetchGoal = async (params: UserNicknameProps) => {
-  const response = await httpClient.get<UserGoalResponse>('/home/main', {
-    params,
-  });
-  return response;
+// 목표 fetch api
+export const fetchGoal = async () => {
+  const response = await httpClient.get<UserGoalResponse>('/home/goal');
+  return response.data;
 };
