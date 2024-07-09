@@ -28,7 +28,7 @@ function Favorite() {
 
 export const BookListPageStyle = styled.div`
   padding: 50px;
-  width: 90%;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
