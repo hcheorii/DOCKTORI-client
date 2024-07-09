@@ -150,13 +150,13 @@ const NavbarStyle = styled.div`
     align-items: center;
     color: white;
     text-align: center;
-    border-top-left-radius: 12px; /* 왼쪽 상단 모서리 둥글게 */
-    border-bottom-left-radius: 12px; /* 왼쪽 하단 모서리 둥글게 */
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
     justify-content: space-between;
 
     .logo {
         img {
-            width: 70%; /* 이미지크기 조정 */
+            width: 70%;
             cursor: pointer;
         }
     }

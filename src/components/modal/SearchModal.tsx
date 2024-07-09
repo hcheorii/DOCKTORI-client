@@ -150,14 +150,14 @@ const Container = styled.div`
             flex-direction: column;
             gap: 10px;
             width: 100%;
-            max-height: 300px; /* 3개의 아이템만 보이도록 높이 설정 */
-            overflow-y: auto; /* 스크롤 가능하게 설정 */
+            max-height: 300px;
+            overflow-y: auto;
 
             .result-item {
                 display: flex;
                 gap: 10px;
                 align-items: center;
-                cursor: pointer; /* 클릭 가능하게 설정 */
+                cursor: pointer;
 
                 img {
                     width: 50px;

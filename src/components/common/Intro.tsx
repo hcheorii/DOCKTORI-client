@@ -19,13 +19,13 @@ const IntroStyle = styled.div`
     align-items: center;
     color: white;
     text-align: center;
-    border-top-left-radius: 12px; /* 왼쪽 상단 모서리 둥글게 */
-    border-bottom-left-radius: 12px; /* 왼쪽 하단 모서리 둥글게 */
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
 
     .logo {
-        width: 30%; /* 이미지 크기 조정 */
+        width: 30%;
     }
 `;
 const TextOverlay = styled.div`
-    font-size: 1.5rem; /* 글꼴 크기 조정 */
+    font-size: 1.5rem;
 `;
