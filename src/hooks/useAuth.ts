@@ -20,7 +20,7 @@ export const useAuth = () => {
       (res) => {
         storeLogin(res.accessToken);
         showAlert('로그인이 성공했습니다.');
-        nav('/');
+        nav('/main');
       },
       (error) => {
         console.log(error);
