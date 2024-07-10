@@ -98,9 +98,14 @@ const MainStyle = styled.div`
   }
 
   .profile {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     align-items: center;
     gap: 25px;
+
+    @media (max-width: 975px) {
+        grid-template-columns: 1fr;
+    }
   }
 
   .profile_item {
