@@ -188,19 +188,28 @@ const NavbarStyle = styled.div`
             .link-item {
                 font-size: 1.5rem;
                 width: 100%;
-                padding: 12px 8px;
                 a {
                     display: block;
                     width: 100%;
+                    padding: 10px; /* padding 추가 */
+                    text-decoration: none;
+                    color: white;
+                    -webkit-transition: background-color 0.3s ease,
+                        font-size 0.3s ease;
+                    -moz-transition: background-color 0.3s ease,
+                        font-size 0.3s ease;
+                    -o-transition: background-color 0.3s ease,
+                        font-size 0.3s ease;
+                    -ms-transition: background-color 0.3s ease,
+                        font-size 0.3s ease;
+                    transition: background-color 0.3s ease, font-size 0.3s ease;
                 }
             }
-            .link-item > * {
-                text-decoration: none;
-                color: white;
-            }
+
             .link-item:hover,
             .link-item.active {
                 background-color: ${({ theme }) => theme.color.first};
+                font-size: 1.8rem; /* 마우스 호버 시 글자 크기 조정 */
             }
         }
     }
