@@ -1,18 +1,18 @@
-import { FaCircleUser } from 'react-icons/fa6';
-import styled from 'styled-components';
-import Button from './Button';
-import image from '../../images/logo_bgremoved.png';
-import { FaPlus } from 'react-icons/fa';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { IoLogOut, IoTrashBin } from 'react-icons/io5';
-import DropDown from './Dropdown';
-import { RiLockPasswordFill } from 'react-icons/ri';
-import ConfirmModal from '../modal/ConfirmModal';
-import { useAuth } from '../../hooks/useAuth';
-import SearchModal from '../modal/SearchModal';
-import { useModal } from '../../hooks/useModal';
-import { BookSearchItem } from '../../models/book.model';
-import { useAddBook } from '../../hooks/useAddBook';
+import { FaStar, FaBookOpen, FaBook, FaPlus, FaCircleUser } from "react-icons/fa";
+import Button from "./Button";
+import image from "../../images/logo_bgremoved.png";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { IoLogOut, IoTrashBin } from "react-icons/io5";
+import DropDown from "./Dropdown";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { useState, useEffect } from "react";
+import ConfirmModal from "../modal/ConfirmModal";
+import { useAuth } from "../../hooks/useAuth";
+import { useModal } from "../../hooks/useModal";
+import SearchModal from "../modal/SearchModal";
+import { BookSearchItem } from "../../models/book.model";
+import { useAddBook } from "../../hooks/useAddBook";
+import styled from "styled-components";
 
 export default function Navbar() {
   const { openModal } = useModal();
@@ -20,6 +20,23 @@ export default function Navbar() {
   const { addSearchBook } = useAddBook();
   const nav = useNavigate();
   const location = useLocation();
+
+  const [isMediumScreen, setIsMediumScreen] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const updateScreenSize = () => {
+      setIsMediumScreen(window.innerWidth <= 1360);
+      setIsSmallScreen(window.innerWidth <= 700);
+    };
+
+    window.addEventListener("resize", updateScreenSize);
+    updateScreenSize();
+
+    return () => {
+      window.removeEventListener("resize", updateScreenSize);
+    };
+  }, []);
 
   const onClickLogo = () => {
     nav('/main');
@@ -40,9 +57,14 @@ export default function Navbar() {
     });
   };
 
-  const handleWithdrawallClick = () => {
+  const handleWithdrawalClick = () => {
     openModal(ConfirmModal, {
-      children: <p>회원 탈퇴하시겠습니까?</p>,
+      children: (
+        <>
+          <p>독토리 서비스를 탈퇴하시겠습니까?</p>
+          <p>기존 데이터는 모두 삭제됩니다.</p>
+        </>
+      ),
       onSubmit: userWithdrawal,
     });
   };
@@ -55,7 +77,7 @@ export default function Navbar() {
         </div>
         <Button onClick={handleSearchClick} scheme="primary" size="large">
           <div>
-            <FaPlus /> <span>책 등록하기</span>
+            <FaPlus /> {!isMediumScreen && <StyledSpan>책 등록하기</StyledSpan>}
           </div>
         </Button>
         <nav>
@@ -63,20 +85,29 @@ export default function Navbar() {
             <li
               className={`link-item ${
                 location.pathname === '/favorite' ? 'active' : ''
-              }`}>
-              <Link to="/favorite">즐겨찾기</Link>
+              }`}
+            >
+              <Link to="/favorite">
+                {isSmallScreen ? <FaStar /> : "즐겨찾기"}
+              </Link>
             </li>
             <li
               className={`link-item ${
                 location.pathname === '/readingbooks' ? 'active' : ''
-              }`}>
-              <Link to="/readingbooks">읽고 있는 책</Link>
+              }`}
+            >
+              <Link to="/readingbooks">
+                {isSmallScreen ? <FaBookOpen /> : "읽고 있는 책"}
+              </Link>
             </li>
             <li
               className={`link-item ${
                 location.pathname === '/readedbooks' ? 'active' : ''
-              }`}>
-              <Link to="/readedbooks">다 읽은 책</Link>
+              }`}
+            >
+              <Link to="/readedbooks">
+                {isSmallScreen ? <FaBook /> : "다 읽은 책"}
+              </Link>
             </li>
           </ul>
         </nav>
@@ -91,7 +122,7 @@ export default function Navbar() {
             <IoLogOut />
             로그아웃
           </div>
-          <div onClick={handleWithdrawallClick}>
+          <div onClick={handleWithdrawalClick}>
             <IoTrashBin />
             회원탈퇴
           </div>
@@ -160,4 +191,8 @@ const NavbarStyle = styled.div`
     right: 12px;
     bottom: 12px;
   }
+`;
+
+const StyledSpan = styled.span`
+  margin-left: 8px;
 `;
