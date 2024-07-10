@@ -1,11 +1,10 @@
-// src/components/DropDown.tsx
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 interface Props {
-    children: React.ReactNode; // 패널안에 들어가는 내용
-    toggleButton: React.ReactNode; // 버튼 변형 가능
-    isOpen?: boolean; // 열려있는지에 대한 상태
+    children: React.ReactNode;
+    toggleButton: React.ReactNode;
+    isOpen?: boolean;
 }
 
 function DropDown({ children, toggleButton, isOpen = false }: Props) {
@@ -48,7 +47,6 @@ interface DropDownStyleProps {
 }
 
 const DropDownStyle = styled.div<DropDownStyleProps>`
-    position: relative;
     button {
         background: none;
         border: none;
@@ -77,6 +75,10 @@ const DropDownStyle = styled.div<DropDownStyleProps>`
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         border-radius: ${({ theme }) => theme.borderRadius.default};
         z-index: 100;
+
+        @media (max-width: 1200px) {
+            width: 50px;
+        }
     }
 
     .panel > * {
@@ -89,12 +91,23 @@ const DropDownStyle = styled.div<DropDownStyleProps>`
         text-decoration: none;
         color: black;
         border-radius: ${({ theme }) => theme.borderRadius.default};
+
+        @media (max-width: 1200px) {
+            justify-content: center;
+            padding: 10px 0;
+        }
     }
 
     .panel > *:hover {
         background-color: #be8a62;
         color: #fff;
         cursor: pointer;
+    }
+
+    .panel > * > span {
+        @media (max-width: 1200px) {
+            display: none;
+        }
     }
 `;
 
