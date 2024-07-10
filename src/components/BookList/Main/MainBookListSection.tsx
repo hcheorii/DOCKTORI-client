@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import MainBookList from "./MainBookList";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
@@ -18,7 +18,33 @@ const MainBookListSection: React.FC<MainBookListSectionProps> = ({
     isEmpty,
 }) => {
     const [currentPage, setCurrentPage] = useState(0);
-    const booksPerPage = 3;
+    const [booksPerPage, setBooksPerPage] = useState(3);
+    const [maxBooksToShow, setMaxBooksToShow] = useState(9);
+
+    useEffect(() => {
+        const updateBooksPerPage = () => {
+            if (window.innerWidth <= 700) {
+                setBooksPerPage(1);
+                setMaxBooksToShow(3);
+            } else if (window.innerWidth <= 975) {
+                setBooksPerPage(2);
+                setMaxBooksToShow(6);
+            } else {
+                setBooksPerPage(3);
+                setMaxBooksToShow(9);
+            }
+        };
+
+        window.addEventListener("resize", updateBooksPerPage);
+        updateBooksPerPage();
+
+        return () => {
+            window.removeEventListener("resize", updateBooksPerPage);
+        };
+    }, []);
+
+    const visibleBooks = books.slice(0, maxBooksToShow);
+    const pageCount = Math.ceil(visibleBooks.length / booksPerPage);
 
     const handlePrev = () => {
         if (currentPage === 0) return;
@@ -27,7 +53,7 @@ const MainBookListSection: React.FC<MainBookListSectionProps> = ({
 
     const handleNext = () => {
         const indexOfLastBook = (currentPage + 1) * booksPerPage;
-        if (indexOfLastBook >= books.length) return;
+        if (indexOfLastBook >= visibleBooks.length) return;
         setCurrentPage(currentPage + 1);
     };
 
@@ -42,7 +68,7 @@ const MainBookListSection: React.FC<MainBookListSectionProps> = ({
             {!isEmpty && (
                 <>
                     <MainBookList
-                        books={books.slice(
+                        books={visibleBooks.slice(
                             currentPage * booksPerPage,
                             (currentPage + 1) * booksPerPage
                         )}
@@ -52,17 +78,19 @@ const MainBookListSection: React.FC<MainBookListSectionProps> = ({
                             <FaAngleLeft />
                         </button>
                         <IndicatorStyle>
-                            {Array.from({
-                                length: Math.ceil(books.length / booksPerPage),
-                            }).map((_, index) => (
-                                <span
-                                    key={index}
-                                    onClick={() => handleIndicator(index)}
-                                    className={
-                                        index === currentPage ? "active" : ""
-                                    }
-                                ></span>
-                            ))}
+                            {Array.from({ length: pageCount }).map(
+                                (_, index) => (
+                                    <span
+                                        key={index}
+                                        onClick={() => handleIndicator(index)}
+                                        className={
+                                            index === currentPage
+                                                ? "active"
+                                                : ""
+                                        }
+                                    ></span>
+                                )
+                            )}
                         </IndicatorStyle>
                         <button onClick={handleNext} className="next">
                             <FaAngleRight />
@@ -102,6 +130,7 @@ const BookListSectionStyle = styled.div`
         }
     }
 `;
+
 const IndicatorStyle = styled.div`
     display: flex;
     align-items: center;
@@ -119,4 +148,5 @@ const IndicatorStyle = styled.div`
         }
     }
 `;
+
 export default MainBookListSection;
