@@ -1,234 +1,198 @@
-import { FaStar, FaBookOpen, FaBook } from "react-icons/fa";
-import styled from "styled-components";
-
+import { FaStar, FaBookOpen, FaBook, FaPlus, FaCircleUser } from "react-icons/fa";
 import Button from "./Button";
 import image from "../../images/logo_bgremoved.png";
-import { FaPlus } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useAuthStore } from "../../store/authStore";
 import { IoLogOut, IoTrashBin } from "react-icons/io5";
 import DropDown from "./Dropdown";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import ConfirmModal from "../modal/ConfirmModal";
 import { useAuth } from "../../hooks/useAuth";
-import { useAlert } from "../../hooks/useAlert";
-import SearchModal from "../modal/SearchModal"; // 불러오기
-import { FaCircleUser } from "react-icons/fa6";
+import { useModal } from "../../hooks/useModal";
+import SearchModal from "../modal/SearchModal";
+import { BookSearchItem } from "../../models/book.model";
+import { useAddBook } from "../../hooks/useAddBook";
+import styled from "styled-components";
 
 export default function Navbar() {
-    const { isloggedIn, storeLogout } = useAuthStore();
-    const { userWithdrawal, userLogout } = useAuth();
-    const nav = useNavigate();
-    const location = useLocation();
-    const { showAlert } = useAlert();
+  const { openModal } = useModal();
+  const { userWithdrawal, userLogout } = useAuth();
+  const { addSearchBook } = useAddBook();
+  const nav = useNavigate();
+  const location = useLocation();
 
-    const onClickLogo = () => {
-        nav("/main");
+  const [isMediumScreen, setIsMediumScreen] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const updateScreenSize = () => {
+      setIsMediumScreen(window.innerWidth <= 1360);
+      setIsSmallScreen(window.innerWidth <= 700);
     };
 
-    const [showLogoutModal, setShowLogoutModal] = useState(false);
-    const [showWithdrawalModal, setShowWithdrawalModal] = useState(false);
-    const [showSearchModal, setShowSearchModal] = useState(false);
-    const [isMediumScreen, setIsMediumScreen] = useState(false); // 화면 크기 상태 추가
-    const [isSmallScreen, setIsSmallScreen] = useState(false); // 화면 크기 상태 추가
+    window.addEventListener("resize", updateScreenSize);
+    updateScreenSize();
 
-    useEffect(() => {
-        const updateScreenSize = () => {
-            setIsMediumScreen(window.innerWidth <= 1360);
-            setIsSmallScreen(window.innerWidth <= 700); // 700px 이하로 수정
-        };
-
-        window.addEventListener("resize", updateScreenSize);
-        updateScreenSize();
-
-        return () => {
-            window.removeEventListener("resize", updateScreenSize);
-        };
-    }, []);
-
-    const handleSearchClose = () => setShowSearchModal(false);
-
-    const handleLogoutClose = () => setShowLogoutModal(false);
-    const handleLogoutConfirm = () => {
-        setShowLogoutModal(false);
-        userLogout();
+    return () => {
+      window.removeEventListener("resize", updateScreenSize);
     };
+  }, []);
 
-    const handleWithdrawalClose = () => setShowWithdrawalModal(false);
-    const handleWithdrawalConfirm = () => {
-        setShowWithdrawalModal(false);
-        const token = localStorage.getItem("token");
-        if (token) {
-            userWithdrawal(token);
-        } else {
-            showAlert("로그인이 필요합니다.");
-            nav("/auth/login");
-        }
-    };
+  const onClickLogo = () => {
+    nav('/main');
+  };
 
-    return (
-        <NavbarStyle>
-            {showLogoutModal && (
-                <ConfirmModal
-                    handleClose={handleLogoutClose}
-                    handleConfirm={handleLogoutConfirm}
-                >
-                    <p>정말 로그아웃하시겠습니까?</p>
-                </ConfirmModal>
-            )}
-            {showWithdrawalModal && (
-                <ConfirmModal
-                    handleClose={handleWithdrawalClose}
-                    handleConfirm={handleWithdrawalConfirm}
-                >
-                    <p>독토리 서비스를 탈퇴하시겠습니까?</p>
-                    <p>기존 데이터는 모두 삭제됩니다.</p>
-                </ConfirmModal>
-            )}
-            {showSearchModal && (
-                <SearchModal
-                    showModal={showSearchModal}
-                    handleClose={handleSearchClose}
-                >
-                    <p>책을 검색하세요.</p>
-                </SearchModal>
-            )}
-            <div className="item-containter">
-                <div className="logo" onClick={onClickLogo}>
-                    <img src={image} alt="logo" />
-                </div>
-                <Button
-                    onClick={() => setShowSearchModal(true)}
-                    scheme="primary"
-                    size="large"
-                >
-                    <FaPlus />
-                    {!isMediumScreen && <StyledSpan>책 등록하기</StyledSpan>}
-                </Button>
-                <nav>
-                    <ul className="link-items">
-                        <li
-                            className={`link-item ${
-                                location.pathname === "/favorite"
-                                    ? "active"
-                                    : ""
-                            }`}
-                        >
-                            <Link to="/favorite">
-                                {isSmallScreen ? <FaStar /> : "즐겨찾기"}
-                            </Link>
-                        </li>
-                        <li
-                            className={`link-item ${
-                                location.pathname === "/readingbooks"
-                                    ? "active"
-                                    : ""
-                            }`}
-                        >
-                            <Link to="/readingbooks">
-                                {isSmallScreen ? (
-                                    <FaBookOpen />
-                                ) : (
-                                    "읽고 있는 책"
-                                )}
-                            </Link>
-                        </li>
-                        <li
-                            className={`link-item ${
-                                location.pathname === "/readedbooks"
-                                    ? "active"
-                                    : ""
-                            }`}
-                        >
-                            <Link to="/readedbooks">
-                                {isSmallScreen ? <FaBook /> : "다 읽은 책"}
-                            </Link>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div className="user">
-                <DropDown toggleButton={<FaCircleUser size={35} />}>
-                    <Link to="/auth/changepassword">
-                        <RiLockPasswordFill />
-                        비밀번호 변경
-                    </Link>
-                    <div onClick={() => setShowLogoutModal(true)}>
-                        <IoLogOut />
-                        로그아웃
-                    </div>
-                    <div onClick={() => setShowWithdrawalModal(true)}>
-                        <IoTrashBin />
-                        회원탈퇴
-                    </div>
-                </DropDown>
-            </div>
-        </NavbarStyle>
-    );
+  const handleSearchClick = () => {
+    openModal(SearchModal, {
+      onSubmit: (book: BookSearchItem) => {
+        addSearchBook(book);
+      },
+    });
+  };
+
+  const handleLogoutClick = () => {
+    openModal(ConfirmModal, {
+      children: <p>로그아웃하시겠습니까?</p>,
+      onSubmit: userLogout,
+    });
+  };
+
+  const handleWithdrawalClick = () => {
+    openModal(ConfirmModal, {
+      children: (
+        <>
+          <p>독토리 서비스를 탈퇴하시겠습니까?</p>
+          <p>기존 데이터는 모두 삭제됩니다.</p>
+        </>
+      ),
+      onSubmit: userWithdrawal,
+    });
+  };
+
+  return (
+    <NavbarStyle>
+      <div className="item-containter">
+        <div className="logo" onClick={onClickLogo}>
+          <img src={image} alt="logo" />
+        </div>
+        <Button onClick={handleSearchClick} scheme="primary" size="large">
+          <div>
+            <FaPlus /> {!isMediumScreen && <StyledSpan>책 등록하기</StyledSpan>}
+          </div>
+        </Button>
+        <nav>
+          <ul className="link-items">
+            <li
+              className={`link-item ${
+                location.pathname === '/favorite' ? 'active' : ''
+              }`}
+            >
+              <Link to="/favorite">
+                {isSmallScreen ? <FaStar /> : "즐겨찾기"}
+              </Link>
+            </li>
+            <li
+              className={`link-item ${
+                location.pathname === '/readingbooks' ? 'active' : ''
+              }`}
+            >
+              <Link to="/readingbooks">
+                {isSmallScreen ? <FaBookOpen /> : "읽고 있는 책"}
+              </Link>
+            </li>
+            <li
+              className={`link-item ${
+                location.pathname === '/readedbooks' ? 'active' : ''
+              }`}
+            >
+              <Link to="/readedbooks">
+                {isSmallScreen ? <FaBook /> : "다 읽은 책"}
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div className="user">
+        <DropDown toggleButton={<FaCircleUser size={35} />}>
+          <Link to="/auth/changepassword">
+            <RiLockPasswordFill />
+            비밀번호 변경
+          </Link>
+          <div onClick={handleLogoutClick}>
+            <IoLogOut />
+            로그아웃
+          </div>
+          <div onClick={handleWithdrawalClick}>
+            <IoTrashBin />
+            회원탈퇴
+          </div>
+        </DropDown>
+      </div>
+    </NavbarStyle>
+  );
 }
 
 const NavbarStyle = styled.div`
-    position: relative;
-    flex: 1;
-    background-color: #be8a62;
+  position: relative;
+  flex: 1;
+  background-color: #be8a62;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  text-align: center;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  justify-content: space-between;
+
+  .logo {
+    img {
+      width: 70%;
+      cursor: pointer;
+    }
+  }
+  .item-containter {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: white;
-    text-align: center;
-    border-top-left-radius: 12px;
-    border-bottom-left-radius: 12px;
-    justify-content: space-between;
+    gap: 30px;
+    width: 100%;
 
-    .logo {
-        img {
-            width: 70%;
-            cursor: pointer;
-        }
-    }
-    .item-containter {
+    nav {
+      width: 100%;
+
+      .link-items {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: 30px;
         width: 100%;
+      }
 
-        nav {
-            width: 100%;
-
-            .link-items {
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .link-item {
-                font-size: 1.5rem;
-                width: 100%;
-                padding: 12px 8px;
-                a {
-                    display: block;
-                    width: 100%;
-                }
-            }
-            .link-item > * {
-                text-decoration: none;
-                color: white;
-            }
-            .link-item:hover,
-            .link-item.active {
-                background-color: ${({ theme }) => theme.color.first};
-            }
+      .link-item {
+        font-size: 1.5rem;
+        width: 100%;
+        padding: 12px 8px;
+        a {
+          display: block;
+          width: 100%;
         }
+      }
+      .link-item > * {
+        text-decoration: none;
+        color: white;
+      }
+      .link-item:hover,
+      .link-item.active {
+        background-color: ${({ theme }) => theme.color.first};
+      }
     }
-    .user {
-        position: absolute;
-        right: 12px;
-        bottom: 12px;
-    }
+  }
+  .user {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+  }
 `;
 
 const StyledSpan = styled.span`
-    margin-left: 8px; /* 적절한 간격으로 조정 */
+  margin-left: 8px;
 `;
