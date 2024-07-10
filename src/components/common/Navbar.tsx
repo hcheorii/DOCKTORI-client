@@ -1,5 +1,6 @@
-import { FaCircleUser } from "react-icons/fa6";
+import { FaStar, FaBookOpen, FaBook } from "react-icons/fa";
 import styled from "styled-components";
+
 import Button from "./Button";
 import image from "../../images/logo_bgremoved.png";
 import { FaPlus } from "react-icons/fa";
@@ -8,11 +9,12 @@ import { useAuthStore } from "../../store/authStore";
 import { IoLogOut, IoTrashBin } from "react-icons/io5";
 import DropDown from "./Dropdown";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ConfirmModal from "../modal/ConfirmModal";
 import { useAuth } from "../../hooks/useAuth";
 import { useAlert } from "../../hooks/useAlert";
 import SearchModal from "../modal/SearchModal"; // 불러오기
+import { FaCircleUser } from "react-icons/fa6";
 
 export default function Navbar() {
     const { isloggedIn, storeLogout } = useAuthStore();
@@ -28,6 +30,22 @@ export default function Navbar() {
     const [showLogoutModal, setShowLogoutModal] = useState(false);
     const [showWithdrawalModal, setShowWithdrawalModal] = useState(false);
     const [showSearchModal, setShowSearchModal] = useState(false);
+    const [isMediumScreen, setIsMediumScreen] = useState(false); // 화면 크기 상태 추가
+    const [isSmallScreen, setIsSmallScreen] = useState(false); // 화면 크기 상태 추가
+
+    useEffect(() => {
+        const updateScreenSize = () => {
+            setIsMediumScreen(window.innerWidth <= 1360);
+            setIsSmallScreen(window.innerWidth <= 700); // 700px 이하로 수정
+        };
+
+        window.addEventListener("resize", updateScreenSize);
+        updateScreenSize();
+
+        return () => {
+            window.removeEventListener("resize", updateScreenSize);
+        };
+    }, []);
 
     const handleSearchClose = () => setShowSearchModal(false);
 
@@ -85,9 +103,8 @@ export default function Navbar() {
                     scheme="primary"
                     size="large"
                 >
-                    <div>
-                        <FaPlus /> <span>책 등록하기</span>
-                    </div>
+                    <FaPlus />
+                    {!isMediumScreen && <StyledSpan>책 등록하기</StyledSpan>}
                 </Button>
                 <nav>
                     <ul className="link-items">
@@ -98,7 +115,9 @@ export default function Navbar() {
                                     : ""
                             }`}
                         >
-                            <Link to="/favorite">즐겨찾기</Link>
+                            <Link to="/favorite">
+                                {isSmallScreen ? <FaStar /> : "즐겨찾기"}
+                            </Link>
                         </li>
                         <li
                             className={`link-item ${
@@ -107,7 +126,13 @@ export default function Navbar() {
                                     : ""
                             }`}
                         >
-                            <Link to="/readingbooks">읽고 있는 책</Link>
+                            <Link to="/readingbooks">
+                                {isSmallScreen ? (
+                                    <FaBookOpen />
+                                ) : (
+                                    "읽고 있는 책"
+                                )}
+                            </Link>
                         </li>
                         <li
                             className={`link-item ${
@@ -116,7 +141,9 @@ export default function Navbar() {
                                     : ""
                             }`}
                         >
-                            <Link to="/readedbooks">다 읽은 책</Link>
+                            <Link to="/readedbooks">
+                                {isSmallScreen ? <FaBook /> : "다 읽은 책"}
+                            </Link>
                         </li>
                     </ul>
                 </nav>
@@ -200,4 +227,8 @@ const NavbarStyle = styled.div`
         right: 12px;
         bottom: 12px;
     }
+`;
+
+const StyledSpan = styled.span`
+    margin-left: 8px; /* 적절한 간격으로 조정 */
 `;
