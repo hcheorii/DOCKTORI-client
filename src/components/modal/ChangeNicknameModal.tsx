@@ -3,55 +3,59 @@ import styled from 'styled-components';
 import { FaPlus } from 'react-icons/fa6';
 import { createPortal } from 'react-dom';
 import { useUserInfo } from '../../hooks/useUserInfo';
+import { ChangeUserInfoProps } from '../../models/user.model';
 
 interface Props {
   children: React.ReactNode;
-  handleClose: () => void;
-  showModal: boolean;
+  onClose: () => void;
+  onSubmit: (data: ChangeUserInfoProps) => void;
 }
 
 const ChangeNicknameModal: React.FC<Props> = ({
   children,
-  handleClose,
-  showModal,
+  onClose,
+  onSubmit,
 }) => {
-  const { nickname, goal, changeProfile: changeUserInfo } = useUserInfo();
+  const { nickname, goal } = useUserInfo();
   const [newNickname, setNewNickname] = useState<string>(nickname || '');
   const [newGoal, setNewGoal] = useState<string>(goal || '');
 
   useEffect(() => {
-    if (showModal && nickname && goal) {
+    if (nickname && goal) {
       setNewNickname(nickname);
       setNewGoal(goal);
     }
-  }, [showModal, nickname, goal]);
+  }, [nickname, goal]);
 
   const handleSubmit = () => {
-    console.log(newGoal);
-    changeUserInfo({ cNickname: newNickname, cGoal: newGoal });
-    handleClose();
+    onSubmit({ cNickname: newNickname, cGoal: newGoal });
+    onClose();
+  };
+
+  const handleClose = () => {
+    onClose();
   };
 
   return createPortal(
     <ChangeNicknameModalBackground>
       <Container>
         <FaPlus size={25} onClick={handleClose} />
-        <div className='modal-body'>
-          <div className='modal-message'>{children}</div>
-          <div className='search-container'>
+        <div className="modal-body">
+          <div className="modal-message">{children}</div>
+          <div className="search-container">
             <input
-              type='text'
+              type="text"
               value={newNickname}
               onChange={(e) => setNewNickname(e.target.value)}
-              placeholder='새로운 닉네임을 입력하세요'
+              placeholder="새로운 닉네임을 입력하세요"
               autoFocus
               maxLength={10}
             />
             <input
-              type='text'
+              type="text"
               value={newGoal}
               onChange={(e) => setNewGoal(e.target.value)}
-              placeholder='새로운 목표를 입력하세요.'
+              placeholder="새로운 목표를 입력하세요."
               maxLength={20}
               style={{ width: '100%' }}
             />
