@@ -1,5 +1,4 @@
 import { FaStar, FaBookOpen, FaBook, FaPlus } from 'react-icons/fa';
-import Button from './Button';
 import image from '../../images/logo_bgremoved.png';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { IoLogOut, IoTrashBin } from 'react-icons/io5';
@@ -28,7 +27,7 @@ export default function Navbar() {
   useEffect(() => {
     const updateScreenSize = () => {
       setIsMediumScreen(window.innerWidth <= 1360);
-      setIsSmallScreen(window.innerWidth <= 700);
+      setIsSmallScreen(window.innerWidth <= 730);
     };
 
     window.addEventListener('resize', updateScreenSize);
@@ -76,11 +75,9 @@ export default function Navbar() {
         <div className="logo" onClick={onClickLogo}>
           <img src={image} alt="logo" />
         </div>
-        <Button onClick={handleSearchClick} scheme="primary" size="large">
-          <div>
-            <FaPlus /> {!isMediumScreen && <StyledSpan>책 등록하기</StyledSpan>}
-          </div>
-        </Button>
+        <button className="addBtn" onClick={handleSearchClick}>
+          <FaPlus /> {!isMediumScreen && <span>도서 등록</span>}
+        </button>
         <nav>
           <ul className="link-items">
             <li
@@ -149,6 +146,32 @@ const NavbarStyle = styled.div`
       cursor: pointer;
     }
   }
+
+  .addBtn {
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    background-color: ${({ theme }) => theme.color.first};
+    color: ${({ theme }) => theme.color.white};
+    padding: 16px 20px;
+    border-radius: ${({ theme }) => theme.borderRadius.default};
+    font-size: 1.3rem;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+
+    svg {
+      font-size: 1.5rem;
+    }
+  }
+
   .item-containter {
     display: flex;
     flex-direction: column;
@@ -166,7 +189,8 @@ const NavbarStyle = styled.div`
       }
 
       .link-item {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
+
         width: 100%;
         a {
           display: block;
@@ -185,7 +209,7 @@ const NavbarStyle = styled.div`
       .link-item:hover,
       .link-item.active {
         background-color: ${({ theme }) => theme.color.first};
-        font-size: 1.8rem; /* 마우스 호버 시 글자 크기 조정 */
+        font-weight: bold;
       }
     }
   }
@@ -194,8 +218,4 @@ const NavbarStyle = styled.div`
     right: 12px;
     bottom: 12px;
   }
-`;
-
-const StyledSpan = styled.span`
-  margin-left: 8px;
 `;

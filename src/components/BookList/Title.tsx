@@ -13,4 +13,8 @@ export default function Title({ color, children }: Props) {
 const TitleStyle = styled.h1`
   font-size: 1.8rem;
   color: ${({ theme, color }) => theme.color[color || 'text']};
+
+  @media (max-width: 975px) {
+    font-size: 1.5rem;
+  }
 `;
