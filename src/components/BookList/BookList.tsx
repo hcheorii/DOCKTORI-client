@@ -27,4 +27,12 @@ const BookListStyle = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+
+  @media screen and (max-width: 1360px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: 975px) {
+    grid-template-columns: 1fr;
+  }
 `;

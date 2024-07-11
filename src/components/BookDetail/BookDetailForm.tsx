@@ -70,4 +70,12 @@ const ReviewFormStyle = styled.form`
       background-color: ${({ theme }) => theme.color.second};
     }
   }
+
+  @media (max-width: 975px) {
+    width: 100%;
+
+    button {
+      width: 35px;
+    }
+  }
 `;
