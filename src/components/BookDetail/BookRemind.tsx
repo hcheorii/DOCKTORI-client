@@ -28,12 +28,12 @@ export default function BookRemind({
 
   return (
     <BookRemindStyle>
-      <Title color='first'>기억하고 싶은 구절</Title>
+      <Title color="first">기억하고 싶은 구절</Title>
       <BookDetailForm
-        placeholder='기억하고 싶은 구절을 기록해보세요'
+        placeholder="기억하고 싶은 구절을 기록해보세요"
         onSubmit={onSubmit}
       />
-      <ul className='reminds'>
+      <ul className="reminds">
         {reminds.map((remind, index) => (
           <li key={index}>
             <BookDetailContent
@@ -102,6 +102,7 @@ const BookRemindStyle = styled.div`
     justify-content: center;
     align-items: center;
     gap: 8px;
+    margin: 0;
 
     li {
       width: 100%;

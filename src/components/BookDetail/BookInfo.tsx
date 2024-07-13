@@ -66,31 +66,31 @@ export default function BookInfo({
 
   return (
     <BookInfoStyle>
-      <button className='deleteBtn' onClick={() => handleDelete(isbn)}>
+      <button className="deleteBtn" onClick={() => handleDelete(isbn)}>
         삭제
         <FaTrashAlt />
       </button>
-      <Title color='text'>{bookTitle}</Title>
-      <p className='author'>{bookAuthor}</p>
-      <div className='image'>
+      <Title color="text">{bookTitle}</Title>
+      <p className="author">{bookAuthor}</p>
+      <div className="image">
         <img src={bookImage} alt={bookTitle} />
       </div>
-      <form className='date' onSubmit={handleDateSubmit}>
-        <div className='date-select'>
-          <div className='start'>
+      <form className="date" onSubmit={handleDateSubmit}>
+        <div className="date-select">
+          <div className="start">
             <label>시작일 : </label>
             <input
-              type='date'
+              type="date"
               value={date.start}
               onChange={handleStartChange}
             />
           </div>
-          <div className='end'>
+          <div className="end">
             <label>완료일 : </label>
-            <input type='date' value={date.end} onChange={handleEndChange} />
+            <input type="date" value={date.end} onChange={handleEndChange} />
           </div>
         </div>
-        <button className='date-checkBtn'>
+        <button className="date-checkBtn">
           <FaCheck />
         </button>
       </form>
@@ -103,7 +103,7 @@ const BookInfoStyle = styled.div`
   width: 100%;
   max-width: 1080px;
   margin: 0 auto;
-  padding: 25px;
+  padding: 36px;
   display: flex;
   flex-direction: column;
   justify-content: center;

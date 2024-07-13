@@ -51,7 +51,6 @@ const BookDetailStyle = styled.div`
   padding: 50px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: 25px;
   align-items: center;
   overflow-y: scroll;

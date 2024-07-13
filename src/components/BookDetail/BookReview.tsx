@@ -46,7 +46,7 @@ export default function BookReview({
 
   return (
     <BookReviewStyle>
-      <Title color='first'>서평</Title>
+      <Title color="first">서평</Title>
       <BookRating
         score={rating}
         onChange={handleRatingChange}
@@ -54,7 +54,7 @@ export default function BookReview({
       />
       {edit && (
         <BookDetailForm
-          placeholder='서평을 작성해보세요'
+          placeholder="서평을 작성해보세요"
           onSubmit={handleReviewSubmit}
           value={review}
         />
@@ -76,7 +76,7 @@ const BookReviewStyle = styled.div`
   width: 100%;
   max-width: 1080px;
   margin: 0 auto;
-  padding: 25px;
+  padding: 0 25px;
   display: flex;
   flex-direction: column;
   justify-content: center;
