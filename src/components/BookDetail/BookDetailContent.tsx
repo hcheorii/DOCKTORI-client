@@ -22,7 +22,6 @@ const BookDetailContentStyle = styled.div`
   border: 2px solid ${({ theme }) => theme.color.second};
   border-radius: ${({ theme }) => theme.borderRadius.medium};
   width: 100%;
-  min-height: 50px;
 
   p {
     margin: 0;
