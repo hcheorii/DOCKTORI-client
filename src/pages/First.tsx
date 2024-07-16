@@ -10,7 +10,7 @@ export default function FirstPage() {
 
   useEffect(() => {
     if (isloggedIn) navigate('/main');
-  }, [isloggedIn]);
+  }, [isloggedIn, navigate]);
 
   return (
     <FirstPageContainer>
