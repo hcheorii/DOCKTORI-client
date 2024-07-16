@@ -1,5 +1,4 @@
-// src/pages/Signup.tsx
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../hooks/useAuth';
@@ -7,7 +6,7 @@ import styled from 'styled-components';
 import { SignupInfo } from '../models/user.model';
 import { useAuthStore } from '../store/authStore';
 
-function Signup() {
+export default function Signup() {
   const { userSignup } = useAuth();
   const navigate = useNavigate();
   const { isloggedIn } = useAuthStore();
@@ -28,58 +27,58 @@ function Signup() {
 
   return (
     <SignupContainer>
-      <div className='title'>독토리 회원가입</div>
+      <div className="title">독토리 회원가입</div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
           <input
-            inputMode='email'
-            placeholder='이메일'
-            type='email'
+            inputMode="email"
+            placeholder="이메일"
+            type="email"
             autoFocus
             {...register('email', { required: true })}
           />
-          {errors.email && <p className='error-text'>이메일을 입력해주세요.</p>}
+          {errors.email && <p className="error-text">이메일을 입력해주세요.</p>}
         </fieldset>
         <fieldset>
           <input
-            inputMode='text'
-            placeholder='비밀번호'
-            type='password'
+            inputMode="text"
+            placeholder="비밀번호"
+            type="password"
             {...register('password1', { required: true })}
           />
           {errors.password1 && (
-            <p className='error-text'>비밀번호를 입력해주세요.</p>
+            <p className="error-text">비밀번호를 입력해주세요.</p>
           )}
         </fieldset>
         <fieldset>
           <input
-            inputMode='text'
-            placeholder='비밀번호 확인'
-            type='password'
+            inputMode="text"
+            placeholder="비밀번호 확인"
+            type="password"
             {...register('password2', { required: true })}
           />
           {errors.password2 && (
-            <p className='error-text'>비밀번호를 입력해주세요.</p>
+            <p className="error-text">비밀번호를 입력해주세요.</p>
           )}
         </fieldset>
         <fieldset>
           <input
-            inputMode='text'
-            placeholder='닉네임'
-            type='text'
+            inputMode="text"
+            placeholder="닉네임"
+            type="text"
             maxLength={10}
             {...register('nickname', { required: true })}
           />
           {errors.nickname && (
-            <p className='error-text'>닉네임을 입력해주세요.</p>
+            <p className="error-text">닉네임을 입력해주세요.</p>
           )}
         </fieldset>
         <fieldset>
-          <button type='submit'>회원가입</button>
+          <button type="submit">회원가입</button>
         </fieldset>
       </form>
-      <div className='info'>
-        <Link to='/auth/login'>이미 회원이신가요?</Link>
+      <div className="info">
+        <Link to="/auth/login">이미 회원이신가요?</Link>
       </div>
     </SignupContainer>
   );
@@ -150,5 +149,3 @@ const SignupContainer = styled.div`
     text-decoration: underline;
   }
 `;
-
-export default Signup;

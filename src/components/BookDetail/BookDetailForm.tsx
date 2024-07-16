@@ -7,11 +7,7 @@ interface Props {
   value?: string;
 }
 
-export default function BookDetailForm({
-  placeholder,
-  onSubmit,
-  value,
-}: Props) {
+const BookDetailForm = ({ placeholder, onSubmit, value }: Props) => {
   const [content, setContent] = useState(value || '');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -35,7 +31,7 @@ export default function BookDetailForm({
       <button>등록</button>
     </ReviewFormStyle>
   );
-}
+};
 
 const ReviewFormStyle = styled.form`
   width: 60%;
@@ -79,3 +75,5 @@ const ReviewFormStyle = styled.form`
     }
   }
 `;
+
+export default BookDetailForm;

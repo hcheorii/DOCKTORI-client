@@ -6,13 +6,13 @@ import BookList from '../components/BookList/BookList';
 import BookEmpty from '../components/BookList/BookEmpty';
 import Loading from '../components/common/Loading';
 
-function Favorite() {
+export default function Favorite() {
   const { bookList, isBookListLoading, isEmpty, clickLike, clickFinish } =
     useBookList(FAVORITE);
 
   return (
     <BookListPageStyle>
-      <Title color='first'>즐겨찾기</Title>
+      <Title color="first">즐겨찾기</Title>
       {isEmpty && <BookEmpty />}
       {!isEmpty && isBookListLoading && <Loading />}
       {!isEmpty && (
@@ -35,4 +35,3 @@ export const BookListPageStyle = styled.div`
   gap: 30px;
   overflow-y: auto;
 `;
-export default Favorite;

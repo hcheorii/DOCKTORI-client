@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,7 @@ import { useAlert } from '../hooks/useAlert';
 import { getToken } from '../store/authStore';
 import { UserChangePassword } from '../models/user.model';
 
-function ChangePassword() {
+export default function ChangePassword() {
   const { userChangePassword } = useAuth();
   const nav = useNavigate();
   const { showAlert } = useAlert();
@@ -37,36 +37,36 @@ function ChangePassword() {
 
   return (
     <ChangePasswordStyle>
-      <div className='title'>비밀번호 변경</div>
+      <div className="title">비밀번호 변경</div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
           <input
-            inputMode='text'
-            placeholder='변경할 비밀번호'
-            type='password'
+            inputMode="text"
+            placeholder="변경할 비밀번호"
+            type="password"
             {...register('newpassword1', { required: true })}
           />
           {errors.newpassword1 && (
-            <p className='error-text'>새 비밀번호를 입력해주세요.</p>
+            <p className="error-text">새 비밀번호를 입력해주세요.</p>
           )}
         </fieldset>
         <fieldset>
           <input
-            inputMode='text'
-            placeholder='변경할 비밀번호 확인'
-            type='password'
+            inputMode="text"
+            placeholder="변경할 비밀번호 확인"
+            type="password"
             {...register('newpassword2', { required: true })}
           />
           {errors.newpassword2 && (
-            <p className='error-text'>새 비밀번호 확인을 입력해주세요.</p>
+            <p className="error-text">새 비밀번호 확인을 입력해주세요.</p>
           )}
         </fieldset>
         <fieldset>
-          <button type='submit'>변경</button>
+          <button type="submit">변경</button>
         </fieldset>
         <fieldset>
           <button
-            className='cancel'
+            className="cancel"
             onClick={(e) => {
               e.preventDefault();
               nav('/main');
@@ -152,5 +152,3 @@ const ChangePasswordStyle = styled.div`
     text-decoration: underline;
   }
 `;
-
-export default ChangePassword;

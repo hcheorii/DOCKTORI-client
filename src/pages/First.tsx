@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import logoImage from '../images/logo_bgremoved.png';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 
-const FirstPage = () => {
+export default function FirstPage() {
   const navigate = useNavigate();
   const { isloggedIn } = useAuthStore();
 
@@ -14,7 +14,7 @@ const FirstPage = () => {
 
   return (
     <FirstPageContainer>
-      <Logo src={logoImage} alt='logo' />
+      <Logo src={logoImage} alt="logo" />
       <Description>
         <p>
           <strong>Doktori</strong>는 웹 브라우저에서 언제든 사용할 수 있는 독서
@@ -25,7 +25,7 @@ const FirstPage = () => {
       <button onClick={() => navigate('/auth/login')}>시작해보기</button>
     </FirstPageContainer>
   );
-};
+}
 
 const FirstPageContainer = styled.div`
   display: flex;
@@ -71,5 +71,3 @@ const Description = styled.div`
     color: ${({ theme }) => theme.color.background};
   }
 `;
-
-export default FirstPage;

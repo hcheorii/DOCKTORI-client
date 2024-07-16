@@ -11,11 +11,7 @@ interface Props {
   onSubmit: (data: ChangeUserInfoProps) => void;
 }
 
-const ChangeNicknameModal: React.FC<Props> = ({
-  children,
-  onClose,
-  onSubmit,
-}) => {
+const ChangeNicknameModal = ({ children, onClose, onSubmit }: Props) => {
   const { nickname, goal } = useUserInfo();
   const [newNickname, setNewNickname] = useState<string>(nickname || '');
   const [newGoal, setNewGoal] = useState<string>(goal || '');

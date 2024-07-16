@@ -1,5 +1,3 @@
-// MainBookItem.tsx
-import React from 'react';
 import styled from 'styled-components';
 import { BookListItem } from '../../../models/book.model';
 import { Link } from 'react-router-dom';
@@ -8,7 +6,7 @@ interface Props {
   book: BookListItem;
 }
 
-const MainBookItem: React.FC<Props> = ({ book }) => {
+const MainBookItem = ({ book }: Props) => {
   return (
     <BookBookItemStyle>
       <Link to={`/book/${book.isbn}`}>

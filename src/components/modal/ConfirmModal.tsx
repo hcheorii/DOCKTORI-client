@@ -10,7 +10,7 @@ interface Props {
   onSubmit: () => void;
 }
 
-export default function ConfirmModal({ children, onClose, onSubmit }: Props) {
+const ConfirmModal = ({ children, onClose, onSubmit }: Props) => {
   const handleClose = () => {
     onClose();
   };
@@ -34,7 +34,7 @@ export default function ConfirmModal({ children, onClose, onSubmit }: Props) {
     </ConfirmModalBackground>,
     document.body
   );
-}
+};
 
 const ConfirmModalBackground = styled.div`
   position: fixed;
@@ -87,3 +87,5 @@ const Container = styled.div`
     }
   }
 `;
+
+export default ConfirmModal;

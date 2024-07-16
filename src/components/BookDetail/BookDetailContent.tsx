@@ -7,14 +7,14 @@ interface Props {
   onClick: () => void;
 }
 
-export default function BookDetailContent({ content, icon, onClick }: Props) {
+const BookDetailContent = ({ content, icon, onClick }: Props) => {
   return (
     <BookDetailContentStyle>
       <p>{content}</p>
       <button onClick={onClick}>{icon}</button>
     </BookDetailContentStyle>
   );
-}
+};
 
 const BookDetailContentStyle = styled.div`
   position: relative;
@@ -53,3 +53,5 @@ const BookDetailContentStyle = styled.div`
     }
   }
 `;
+
+export default BookDetailContent;

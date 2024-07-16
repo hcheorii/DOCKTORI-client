@@ -27,17 +27,17 @@ export default function BookDetail() {
             handleDelete={handleDeleteBook}
             handleChangeDate={handleChangeDate}
           />
-          <BookRemind
-            isbn={isbn!}
-            reminds={book!.bookRemind}
-            handleAddRemind={handleAddRemind}
-            handleDeleteRemind={handleDeleteRemind}
-          />
           <BookReview
             isbn={isbn!}
             review={book!.bookReview}
             score={book!.bookScore}
             handleAddReview={handleAddReview}
+          />
+          <BookRemind
+            isbn={isbn!}
+            reminds={book!.bookRemind}
+            handleAddRemind={handleAddRemind}
+            handleDeleteRemind={handleDeleteRemind}
           />
         </>
       )}

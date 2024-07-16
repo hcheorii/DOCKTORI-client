@@ -2,16 +2,16 @@ import styled from 'styled-components';
 import Title from './Title';
 import { FaBookOpen } from 'react-icons/fa6';
 
-export default function BookEmpty() {
+const BookEmpty = () => {
   return (
     <BookEmptyStyle>
-      <div className='icon'>
+      <div className="icon">
         <FaBookOpen />
       </div>
-      <Title color='gray'>책을 채워주세요</Title>
+      <Title color="gray">책을 채워주세요</Title>
     </BookEmptyStyle>
   );
-}
+};
 
 const BookEmptyStyle = styled.div`
   width: 100%;
@@ -30,3 +30,5 @@ const BookEmptyStyle = styled.div`
     }
   }
 `;
+
+export default BookEmpty;

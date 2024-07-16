@@ -10,7 +10,7 @@ interface Props {
   handleFinish?: (isbn: string) => void;
 }
 
-export default function BookItem({ book, handleLike, handleFinish }: Props) {
+const BookItem = ({ book, handleLike, handleFinish }: Props) => {
   return (
     <BookItemStyle>
       <Link to={`/book/${book.isbn}`}>
@@ -35,7 +35,7 @@ export default function BookItem({ book, handleLike, handleFinish }: Props) {
       </div>
     </BookItemStyle>
   );
-}
+};
 
 const BookItemStyle = styled.div`
   display: flex;
@@ -143,3 +143,5 @@ const BookItemStyle = styled.div`
     }
   }
 `;
+
+export default BookItem;
