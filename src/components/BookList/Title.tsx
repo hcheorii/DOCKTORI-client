@@ -6,9 +6,10 @@ interface Props {
   color?: ColorKey;
   children: React.ReactNode;
 }
-export default function Title({ color, children }: Props) {
+
+const Title = ({ color, children }: Props) => {
   return <TitleStyle color={color}>{children}</TitleStyle>;
-}
+};
 
 const TitleStyle = styled.h1`
   font-size: 1.8rem;
@@ -18,3 +19,5 @@ const TitleStyle = styled.h1`
     font-size: 1.5rem;
   }
 `;
+
+export default Title;

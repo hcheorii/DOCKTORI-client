@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Title from '../BookList/Title';
-import React, { useState } from 'react';
 import { AddRemindProps, DeleteRemindProps } from '../../models/book.model';
 import { FaTrashAlt } from 'react-icons/fa';
 import BookDetailForm from './BookDetailForm';
@@ -13,12 +12,12 @@ interface Props {
   handleDeleteRemind: (data: DeleteRemindProps) => void;
 }
 
-export default function BookRemind({
+const BookRemind = ({
   isbn,
   reminds,
   handleAddRemind,
   handleDeleteRemind,
-}: Props) {
+}: Props) => {
   const onSubmit = (content: string) => {
     handleAddRemind({
       isbn,
@@ -46,13 +45,13 @@ export default function BookRemind({
       </ul>
     </BookRemindStyle>
   );
-}
+};
 
 const BookRemindStyle = styled.div`
   width: 100%;
   max-width: 1080px;
   margin: 0 auto;
-  padding: 25px;
+  padding: 0 25px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -109,3 +108,5 @@ const BookRemindStyle = styled.div`
     }
   }
 `;
+
+export default BookRemind;

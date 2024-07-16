@@ -15,12 +15,7 @@ interface Props {
   score?: number;
 }
 
-export default function BookReview({
-  isbn,
-  handleAddReview,
-  review,
-  score,
-}: Props) {
+const BookReview = ({ isbn, handleAddReview, review, score }: Props) => {
   const [rating, setRating] = useState(score || 0);
   const [edit, setEdit] = useState(review ? false : true);
   const { showAlert } = useAlert();
@@ -70,13 +65,13 @@ export default function BookReview({
       )}
     </BookReviewStyle>
   );
-}
+};
 
 const BookReviewStyle = styled.div`
   width: 100%;
   max-width: 1080px;
   margin: 0 auto;
-  padding: 0 25px;
+  padding: 25px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -92,3 +87,5 @@ const BookReviewStyle = styled.div`
     min-height: 50px;
   }
 `;
+
+export default BookReview;

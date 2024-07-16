@@ -7,7 +7,7 @@ interface Props {
   readonly?: boolean;
 }
 
-export default function BookRating({ score, onChange, readonly }: Props) {
+const BookRating = ({ score, onChange, readonly }: Props) => {
   const handleStarClick = (idx: number) => {
     if (!readonly) {
       onChange(idx + 1);
@@ -22,13 +22,13 @@ export default function BookRating({ score, onChange, readonly }: Props) {
           $filled={idx < score}
           $readonly={readonly}
           onClick={() => handleStarClick(idx)}
-          className='star'>
+          className="star">
           <FaStar />
         </Star>
       ))}
     </BookRatingStyle>
   );
-}
+};
 
 const BookRatingStyle = styled.div`
   display: flex;
@@ -52,3 +52,5 @@ interface StarProps {
   $filled: boolean;
   $readonly?: boolean;
 }
+
+export default BookRating;

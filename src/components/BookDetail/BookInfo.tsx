@@ -12,12 +12,7 @@ interface Props {
   handleChangeDate: (data: ChangeDateProps) => void;
 }
 
-export default function BookInfo({
-  isbn,
-  book,
-  handleDelete,
-  handleChangeDate,
-}: Props) {
+const BookInfo = ({ isbn, book, handleDelete, handleChangeDate }: Props) => {
   const { bookTitle, bookAuthor, bookImage, bookStartDate, bookEndDate } = book;
   const [date, setDate] = useState({
     start: bookStartDate,
@@ -96,7 +91,7 @@ export default function BookInfo({
       </form>
     </BookInfoStyle>
   );
-}
+};
 
 const BookInfoStyle = styled.div`
   position: relative;
@@ -196,3 +191,5 @@ const BookInfoStyle = styled.div`
     }
   }
 `;
+
+export default BookInfo;

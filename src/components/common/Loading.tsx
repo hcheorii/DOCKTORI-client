@@ -1,13 +1,13 @@
 import { FaSpinner } from 'react-icons/fa';
 import styled from 'styled-components';
 
-export default function Loading() {
+const Loading = () => {
   return (
     <LoadingStyle>
       <FaSpinner />
     </LoadingStyle>
   );
-}
+};
 
 const LoadingStyle = styled.div`
   width: 100%;
@@ -29,3 +29,5 @@ const LoadingStyle = styled.div`
     animation: rotate 1.5s linear infinite;
   }
 `;
+
+export default Loading;

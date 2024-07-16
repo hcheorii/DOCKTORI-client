@@ -1,5 +1,3 @@
-// Main.tsx
-import React, { useState } from 'react';
 import styled from 'styled-components';
 import MainBookListSection from '../components/BookList/Main/MainBookListSection';
 import ChangeNicknameModal from '../components/modal/ChangeNicknameModal';
@@ -11,7 +9,7 @@ import { FaPen } from 'react-icons/fa';
 import { useModal } from '../hooks/useModal';
 import { ChangeUserInfoProps } from '../models/user.model';
 
-const Main: React.FC = () => {
+export default function Main() {
   const { nickname, goal, isUserInfoLoading } = useUserInfo();
   const {
     bookList: readingList,
@@ -82,7 +80,7 @@ const Main: React.FC = () => {
       )}
     </MainStyle>
   );
-};
+}
 
 const MainStyle = styled.div`
   padding: 50px;
@@ -185,5 +183,3 @@ const MainStyle = styled.div`
     }
   }
 `;
-
-export default Main;

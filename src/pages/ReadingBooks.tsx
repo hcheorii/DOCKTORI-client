@@ -6,13 +6,13 @@ import BookList from '../components/BookList/BookList';
 import BookEmpty from '../components/BookList/BookEmpty';
 import Loading from '../components/common/Loading';
 
-function ReadingBooks() {
+export default function ReadingBooks() {
   const { bookList, isBookListLoading, isEmpty, clickLike, clickFinish } =
     useBookList(READING);
 
   return (
     <BookListPageStyle>
-      <Title color='first'>읽고 있는 책</Title>
+      <Title color="first">읽고 있는 책</Title>
       {isEmpty && <BookEmpty />}
       {!isEmpty && isBookListLoading && <Loading />}
       {!isEmpty && (
@@ -25,5 +25,3 @@ function ReadingBooks() {
     </BookListPageStyle>
   );
 }
-
-export default ReadingBooks;

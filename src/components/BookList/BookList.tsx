@@ -8,7 +8,7 @@ interface Props {
   handleFinish?: (isbn: string) => void;
 }
 
-export default function BookList({ books, handleLike, handleFinish }: Props) {
+const BookList = ({ books, handleLike, handleFinish }: Props) => {
   return (
     <BookListStyle>
       {books.map((book) => (
@@ -21,7 +21,7 @@ export default function BookList({ books, handleLike, handleFinish }: Props) {
       ))}
     </BookListStyle>
   );
-}
+};
 
 const BookListStyle = styled.div`
   display: grid;
@@ -36,3 +36,5 @@ const BookListStyle = styled.div`
     grid-template-columns: 1fr;
   }
 `;
+
+export default BookList;

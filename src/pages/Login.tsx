@@ -1,12 +1,12 @@
-// src/pages/Login.tsx
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../hooks/useAuth';
 import styled from 'styled-components';
 import { User } from '../models/user.model';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
-function Login() {
+
+export default function Login() {
   const { userLogin } = useAuth();
   const navigate = useNavigate();
   const { isloggedIn } = useAuthStore();
@@ -27,35 +27,35 @@ function Login() {
 
   return (
     <LoginContainer>
-      <div className='title'>독토리 로그인</div>
+      <div className="title">독토리 로그인</div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
           <input
-            inputMode='email'
-            placeholder='이메일'
-            type='email'
+            inputMode="email"
+            placeholder="이메일"
+            type="email"
             autoFocus
             {...register('email', { required: true })}
           />
-          {errors.email && <p className='error-text'>이메일을 입력해주세요.</p>}
+          {errors.email && <p className="error-text">이메일을 입력해주세요.</p>}
         </fieldset>
         <fieldset>
           <input
-            inputMode='text'
-            placeholder='비밀번호'
-            type='password'
+            inputMode="text"
+            placeholder="비밀번호"
+            type="password"
             {...register('password', { required: true })}
           />
           {errors.password && (
-            <p className='error-text'>비밀번호를 입력해주세요.</p>
+            <p className="error-text">비밀번호를 입력해주세요.</p>
           )}
         </fieldset>
         <fieldset>
-          <button type='submit'>로그인</button>
+          <button type="submit">로그인</button>
         </fieldset>
       </form>
-      <div className='info'>
-        <Link to='/auth/signup'>회원가입</Link>
+      <div className="info">
+        <Link to="/auth/signup">회원가입</Link>
       </div>
     </LoginContainer>
   );
@@ -127,5 +127,3 @@ const LoginContainer = styled.div`
     text-decoration: underline;
   }
 `;
-
-export default Login;
