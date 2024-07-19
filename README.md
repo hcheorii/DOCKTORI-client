@@ -69,7 +69,6 @@ DOCKTORI는 독서를 좋아하거나 독서 습관을 들이고 싶은 사람�
 ## 도서 관련 페이지
 ### 즐겨찾기 페이지
 <img width="1710" alt="image" src="https://github.com/user-attachments/assets/f23b8ffa-d287-4aca-a532-ec8ed8731ab0">
-
 - 즐겨찾기 페이지는 좋아요 버튼을 클릭한 도서를 확인할 수 있습니다.
 - 좋아요 버튼은 각 도서 아이템에 모두 있습니다.
 
