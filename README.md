@@ -66,7 +66,7 @@ DOCKTORI는 독서를 좋아하거나 독서 습관을 들이고 싶은 사람�
 <br>
 
 ## 도서 관련 페이지
-### 즐겨찾기 페이지
+### 즐겨찾기 페이지
 <img width="1710" alt="image" src="https://github.com/user-attachments/assets/f23b8ffa-d287-4aca-a532-ec8ed8731ab0">
 - 즐겨찾기 페이지는 좋아요 버튼을 클릭한 도서를 확인할 수 있습니다.
 - 좋아요 버튼은 각 도서 아이템에 모두 있습니다.
@@ -78,7 +78,7 @@ DOCKTORI는 독서를 좋아하거나 독서 습관을 들이고 싶은 사람�
 <img width="1710" alt="image" src="https://github.com/user-attachments/assets/70fbc77a-8c7d-4563-ace8-fb50e0ff2bc0">
 
 
-- 읽고 있는 책 페이지에는 아직 완료 버튼을 클릭하지 않은 읽는 중인 책만 표시됩니다.
+- 읽고 있는 책 페이지에는 아직 완료 버튼을 클릭하지 않은 읽는 중인 책만 표시됩니다.
 
 
 ### 다 읽은 책 페이지
