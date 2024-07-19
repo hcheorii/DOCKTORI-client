@@ -81,7 +81,7 @@ DOCKTORI는 독서를 좋아하거나 독서 습관을 들이고 싶은 사람�
 - 읽고 있는 책 페이지에는 아직 완료 버튼을 클릭하지 않은 읽는 중인 책만 표시됩니다.
 
 
-### 다 읽은 책 페이지
+### 다 읽은 책 페이지
 <img width="1710" alt="image" src="https://github.com/user-attachments/assets/a258aa53-f46e-4175-b691-6708b4a29451">
 
 
