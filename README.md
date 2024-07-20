@@ -3,7 +3,7 @@
 <img width="1710" alt="image" src="https://github.com/user-attachments/assets/5d0c1bb0-7044-4dc8-b7a6-3d46e5e724af">
 
 
-- ** 전체 프로젝트 기간 :** 2024-6-24 ~ 2024-7-10
+ 전체 프로젝트 기간 : 2024-6-24 ~ 2024-7-10
 
  <br>
 
